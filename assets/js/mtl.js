@@ -217,9 +217,17 @@
             .sort(function (a, b) { return a.order - b.order; });
     }
     $$("[data-partner-wall]").forEach(function (wall) {
+        var organizer = "";
         wall.innerHTML = MTL.partnerCategories.map(function (cat, i) {
             var list = partnersOf(cat.id);
             if (!list.length) return "";
+            if (cat.organizer) {
+                // L'organisateur n'est pas un sponsor : bloc distinct, en fin de section
+                organizer = '<section class="organizer-block reveal" style="--c:' + cat.color + '" aria-labelledby="pg-' + cat.id + '">' +
+                    '<h3 class="org-label" id="pg-' + cat.id + '">' + esc(cat.label) + '</h3>' +
+                    '<ul class="partner-logos">' + list.map(function (p) { return logoCell(p, 118); }).join("") + '</ul></section>';
+                return "";
+            }
             var single = list.length === 1;
             return '<section class="partner-group reveal is-' + cat.id + (single ? " is-single" : "") + '" style="--c:' + cat.color + '" aria-labelledby="pg-' + cat.id + '">' +
                 '<header class="partner-group-head"><span class="pg-num">0' + (i + 1) + '</span>' +
@@ -227,6 +235,24 @@
                 '<ul class="partner-logos" style="--cols:' + list.length + '">' +
                 list.map(function (p) { return logoCell(p, single ? 128 : 112); }).join("") +
                 '</ul></section>';
+        }).join("") + organizer;
+    });
+
+    /* ---------- New Speakers 2026 ---------- */
+    // Chaque intervenant : photo, nom, fonction. Rien d'autre.
+    $$("[data-speakers-2026]").forEach(function (box) {
+        var list = (MTL.speakers2026 || []).filter(function (s) { return s.confirmed && s.edition === 2026; })
+            .sort(function (a, b) { return a.displayOrder - b.displayOrder; });
+        if (!list.length) {
+            box.outerHTML = '<p class="ns-soon">New Speakers 2026 — <span>Coming soon</span></p>';
+            return;
+        }
+        var accents = ["var(--pink)", "var(--teal)", "var(--yellow)", "var(--blue)", "var(--purple)"];
+        box.innerHTML = list.map(function (s, i) {
+            return '<li class="ns-item reveal" style="--c:' + accents[i % accents.length] + '">' +
+                '<figure class="ns-photo"><img src="' + esc(ROOT + s.image) + '" alt="' + esc(s.name) + '" width="' + s.width + '" height="' + s.height + '" loading="lazy" decoding="async"></figure>' +
+                '<h3 class="ns-name">' + esc(s.name) + '</h3>' +
+                '<p class="ns-role">' + esc(s.function) + '</p></li>';
         }).join("");
     });
     // Vitrine d'une seule catégorie (ex. partenaire Hackathon sur la page d'inscription)

@@ -15,9 +15,9 @@
        puis cliquer sur « Activate Form » dans l'e-mail reçu par FormSubmit
        (startupgrowfoundation@gmail.com). Tant que ce n'est pas fait, le site
        affiche un message d'erreur (jamais de faux succès).
-   [ ] Logos manquants : Wilaya de la Région de l'Oriental, Sojori.
-       Déposer le fichier officiel (PNG transparent ou SVG) dans
-       assets/img/partners/ puis renseigner logo / width / height ci-dessous.
+   [ ] Logo manquant : Wilaya de la Région de l'Oriental (blason de l'affiche
+       officielle : bouclier rouge, chevron vert, aigle). Déposer le fichier
+       officiel dans assets/img/partners/ puis renseigner logo / width / height.
    ========================================================= */
 (function () {
     "use strict";
@@ -88,7 +88,9 @@
         { id: "institutionnels", label: "Partenaires institutionnels", color: "var(--blue)" },
         { id: "gold", label: "Sponsors Gold", color: "var(--yellow)" },
         { id: "hackathon", label: "Partenaire Hackathon", color: "var(--teal)" },
-        { id: "sponsor", label: "Sponsor", color: "var(--pink)" }
+        { id: "sponsor", label: "Sponsor", color: "var(--pink)" },
+        // Pas une catégorie de sponsoring : affichée à part, en fin de section.
+        { id: "organisateur", label: "Organisateur", color: "var(--purple)", organizer: true }
     ];
 
     // `width`/`height` = dimensions réelles du fichier (évite les décalages de mise en page).
@@ -124,8 +126,30 @@
 
         { id: "sojori", name: "Sojori", short: "Sojori",
           category: "sponsor", order: 1,
-          logo: null, width: 0, height: 0, optical: 1,
-          alt: "Sojori" }
+          logo: "assets/img/partners/sojori.png", width: 446, height: 141, optical: .95,
+          alt: "Sojori — AI workforce for hospitality" },
+
+        { id: "startupgrow-foundation", name: "StartupGrow Foundation", short: "StartupGrow Foundation",
+          category: "organisateur", order: 1,
+          logo: "assets/img/partners/startupgrow-foundation.png", width: 760, height: 200, optical: 1,
+          alt: "StartupGrow Foundation" }
+    ];
+
+    // Speakers confirmés de la 8ème édition (2026). Affichage : photo, nom, fonction — rien d'autre.
+    // Ne publier que des intervenants confirmés (confirmed: true).
+    var speakers2026 = [
+        { id: "zineb-hatim", name: "Zineb Hatim", function: "Présidente Maroc Entrepreneurs",
+          image: "assets/img/speakers-2026/zineb-hatim.jpg", width: 640, height: 800,
+          edition: 2026, confirmed: true, displayOrder: 1 },
+        { id: "rachid-ressani", name: "Rachid Ressani", function: "Président APEBI",
+          image: "assets/img/speakers-2026/rachid-ressani.jpg", width: 544, height: 680,
+          edition: 2026, confirmed: true, displayOrder: 2 },
+        { id: "mohamed-bachiri", name: "Mohamed Bachiri", function: "Vice-Président Général CGEM",
+          image: "assets/img/speakers-2026/mohamed-bachiri.jpg", width: 392, height: 490,
+          edition: 2026, confirmed: true, displayOrder: 3 },
+        { id: "anouar-alaoui-ismaili", name: "Anouar Alaoui Ismaili", function: "Directeur Général Maroc PME",
+          image: "assets/img/speakers-2026/anouar-alaoui-ismaili.jpg", width: 640, height: 800,
+          edition: 2026, confirmed: true, displayOrder: 4 }
     ];
 
     window.MTL = {
@@ -133,6 +157,7 @@
         dates: dates,
         spaces: spaces,
         partnerCategories: partnerCategories,
-        partners: partners
+        partners: partners,
+        speakers2026: speakers2026
     };
 })();

@@ -377,3 +377,77 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (prefers-reduced-motion: reduce) {
     .space-card:hover, .other-card:hover { transform: none; }
 }
+
+/* =========================================================
+   V4 — Organisateur + New Speakers 2026
+   ========================================================= */
+
+/* ---------- Organisateur (fin de la section partenaires) ---------- */
+.organizer-block { grid-column: 1 / -1; position: relative; display: flex; flex-direction: column; align-items: center; padding: 40px 0 6px; }
+.organizer-block::before { content: ""; position: absolute; left: 50%; top: -1px; width: 64px; height: 3px; transform: translateX(-50%); background: var(--c); }
+.org-label { display: inline-flex; align-items: center; gap: 12px; margin: 0 0 6px; font-size: 13px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
+.org-label::before, .org-label::after { content: ""; width: 0; height: 0; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+.org-label::before { border-left: 8px solid var(--pink); }
+.org-label::after { border-right: 8px solid var(--teal); }
+.organizer-block .partner-logos { justify-content: center; width: min(420px, 100%); }
+.organizer-block .partner-cell { min-height: 130px; }
+.organizer-block .partner-cell img { max-height: 76px; }
+
+/* ---------- New Speakers 2026 (style volontairement distinct de Past Speakers) ---------- */
+.new-speakers { position: relative; overflow: hidden; background: linear-gradient(180deg, #fff 0%, var(--bg-soft) 100%); }
+.ns-bg-year { position: absolute; right: -10px; top: 30px; font-size: clamp(120px, 20vw, 260px); font-weight: 800; line-height: .8; letter-spacing: -.05em; color: transparent; -webkit-text-stroke: 2px rgba(75,57,133,.09); pointer-events: none; user-select: none; }
+.ns-bg-tri { position: absolute; left: 4%; bottom: 70px; width: 0; height: 0; border-top: 22px solid transparent; border-bottom: 22px solid transparent; border-left: 38px solid var(--teal); opacity: .85; pointer-events: none; }
+.ns-bg-lines { position: absolute; right: 5%; bottom: 40px; width: 140px; height: 90px; background: repeating-linear-gradient(118deg, var(--pink) 0 3px, transparent 3px 15px); opacity: .25; pointer-events: none; }
+.new-speakers .container { position: relative; }
+.ns-head { max-width: 760px; margin-bottom: 56px; }
+.ns-title { margin: 0; font-size: clamp(44px, 7.4vw, 92px); font-weight: 800; line-height: .92; letter-spacing: -.035em; text-transform: uppercase; color: var(--ink); }
+.ns-title span { display: block; color: var(--pink); }
+
+.ns-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 34px; align-items: start; padding: 0 14px 14px 0; }
+.ns-grid:focus-visible { outline-offset: 8px; }
+.ns-item { position: relative; }
+.ns-item:nth-child(even) { margin-top: 72px; }
+/* Cadre géométrique décalé, couleur de la charte */
+.ns-item::before {
+    content: ""; position: absolute; left: 14px; top: 14px; width: 100%; aspect-ratio: 4 / 5;
+    border: 2px solid var(--c); transition: transform .5s cubic-bezier(.2,.7,.2,1);
+}
+/* Triangle d'angle, révélé au survol */
+.ns-item::after {
+    content: ""; position: absolute; left: 0; top: 0; z-index: 2; width: 0; height: 0;
+    border-top: 46px solid var(--c); border-right: 46px solid transparent;
+    transform: scale(0); transform-origin: top left; transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.ns-photo { position: relative; z-index: 1; margin: 0 0 22px; aspect-ratio: 4 / 5; overflow: hidden; background: var(--line); }
+.ns-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
+.ns-name { position: relative; display: inline-block; margin: 0 0 6px; padding-bottom: 10px; font-size: 18px; font-weight: 700; line-height: 1.2; letter-spacing: .06em; text-transform: uppercase; color: var(--ink); transition: color .3s; }
+.ns-name::after { content: ""; position: absolute; left: 0; bottom: 0; width: 32px; height: 3px; background: var(--c); transition: width .45s cubic-bezier(.2,.7,.2,1); }
+.ns-role { margin: 0; font-size: 14.5px; line-height: 1.45; color: var(--muted); }
+.ns-item:hover::before { transform: translate(-6px, -6px); }
+.ns-item:hover::after { transform: scale(1); }
+.ns-item:hover .ns-photo img { transform: scale(1.04); }
+.ns-item:hover .ns-name { color: var(--black); }
+.ns-item:hover .ns-name::after { width: 100%; }
+.ns-soon { margin: 0; padding: 40px 0; border-top: 2px solid var(--ink); font-size: clamp(22px, 3vw, 32px); font-weight: 800; text-transform: uppercase; color: var(--ink); }
+.ns-soon span { color: var(--pink); }
+
+@media (max-width: 1099px) {
+    .ns-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 44px 40px; max-width: 760px; }
+}
+/* Mobile : galerie horizontale à balayer (scroll-snap natif, sans dépendance) */
+@media (max-width: 680px) {
+    .ns-head { margin-bottom: 36px; }
+    .ns-grid {
+        display: flex; gap: 22px; overflow-x: auto; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+        margin: 0 -20px; padding: 0 34px 18px 20px; scroll-padding-left: 20px; scrollbar-width: thin;
+    }
+    .ns-item { flex: 0 0 76%; scroll-snap-align: start; }
+    .ns-item:nth-child(even) { margin-top: 0; }
+    .ns-item::before { left: 10px; top: 10px; }
+    .ns-name { font-size: 16px; }
+    .ns-bg-lines, .ns-bg-tri { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .ns-item:hover::before { transform: none; }
+    .ns-item:hover .ns-photo img { transform: none; }
+}
