@@ -3,13 +3,15 @@
    Couleurs issues de l'affiche officielle "Save the date"
    ========================================================= */
 :root {
-    --pink: #d9307f;
+    /* Couleurs officielles de la charte Meet The Lead */
+    --pink: #d83382;
     --pink-dark: #b8226a;
-    --blue: #3b80c3;
-    --purple: #4a3b8f;
+    --blue: #3c83bb;
+    --purple: #4b3985;
     --purple-dark: #1e1446;
-    --teal: #17a3b1;
-    --yellow: #f6c21b;
+    --teal: #00a3b4;
+    --yellow: #f6be1e;
+    --black: #16151c;
     --ink: #1b1736;
     --text: #4a4760;
     --muted: #7c7a8e;
