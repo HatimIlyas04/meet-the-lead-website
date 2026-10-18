@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
     <link rel="stylesheet" href="assets/css/fontawesome-all.min.css">
     <link rel="stylesheet" href="assets/css/mtl.css">
+    <link rel="stylesheet" href="assets/css/mtl-v2.css">
 </head>
 
 <body>
@@ -33,10 +34,25 @@
                     <li><a href="blog.html">Actualités</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
-                <div class="mobile-cta"><a href="https://forms.gle/ZoBgGsGPZ2y3SVkx7" target="_blank" rel="noopener" class="btn btn-primary">Réservez votre place</a></div>
+                <div class="mobile-cta">
+                    <p class="mobile-cta-title">S'inscrire</p>
+                    <a class="reg-item" href="hackathon/inscription/" style="--c:var(--teal)"><span class="reg-num" aria-hidden="true">01</span><span><b>Hackathon</b><small>26 – 28 novembre 2026</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    <a class="reg-item is-yellow" href="africa-impact-awards/inscription/" style="--c:var(--yellow)"><span class="reg-num" aria-hidden="true">02</span><span><b>Africa Impact Awards</b><small>Valorisez vos projets à impact</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    <a class="reg-item" href="bridge-to-job/inscription/" style="--c:var(--blue)"><span class="reg-num" aria-hidden="true">03</span><span><b>Bridge to Job</b><small>Opportunités professionnelles</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                    <a href="https://forms.gle/ZoBgGsGPZ2y3SVkx7" target="_blank" rel="noopener" class="btn btn-primary">Réserver ma place à l'événement</a>
+                </div>
             </nav>
             <div class="header-cta">
-                <a href="https://forms.gle/ZoBgGsGPZ2y3SVkx7" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Réservez votre place</a>
+                <div class="reg-menu">
+                    <button type="button" class="btn btn-primary btn-sm reg-toggle" aria-expanded="false" aria-controls="reg-panel">S'inscrire <i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+                    <div class="reg-panel" id="reg-panel" hidden>
+                        <p class="reg-panel-title">Choisissez votre espace</p>
+                        <a class="reg-item" href="hackathon/inscription/" style="--c:var(--teal)"><span class="reg-num" aria-hidden="true">01</span><span><b>Hackathon</b><small>26 – 28 novembre 2026</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        <a class="reg-item is-yellow" href="africa-impact-awards/inscription/" style="--c:var(--yellow)"><span class="reg-num" aria-hidden="true">02</span><span><b>Africa Impact Awards</b><small>Valorisez vos projets à impact</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        <a class="reg-item" href="bridge-to-job/inscription/" style="--c:var(--blue)"><span class="reg-num" aria-hidden="true">03</span><span><b>Bridge to Job</b><small>Opportunités professionnelles</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        <div class="reg-panel-foot"><a href="https://forms.gle/ZoBgGsGPZ2y3SVkx7" target="_blank" rel="noopener">Réserver ma place à l'événement <i class="fas fa-external-link-alt" aria-hidden="true"></i></a><a href="devenir-partenaire/">Devenir partenaire</a></div>
+                    </div>
+                </div>
                 <button class="nav-toggle" type="button" aria-controls="main-nav" aria-expanded="false" aria-label="Menu"><i class="fas fa-bars"></i></button>
             </div>
         </div>
@@ -57,7 +73,8 @@
                     <div class="date-band"><i class="far fa-calendar-alt"></i> 27 – 28 Novembre 2026</div>
                     <div class="place"><i class="fas fa-map-marker-alt"></i> Région de l'Oriental | Nador</div>
                     <div class="hero-actions">
-                        <a href="https://forms.gle/ZoBgGsGPZ2y3SVkx7" target="_blank" rel="noopener" class="btn btn-primary">S'inscrire maintenant <i class="fas fa-arrow-right"></i></a>
+                        <a href="#inscriptions" class="btn btn-primary">Découvrir les inscriptions <i class="fas fa-arrow-down" aria-hidden="true"></i></a>
+                        <a href="devenir-partenaire/" class="btn btn-ghost-light">Devenir partenaire</a>
                         <button type="button" class="video-btn" data-video="0TKJZ4l8IUE"><span class="play"><i class="fas fa-play"></i></span> Revivre l'édition précédente</button>
                     </div>
                 </div>
@@ -81,6 +98,63 @@
                 </div>
             </div>
         </div>
+
+        <section class="section spaces-section" id="inscriptions" aria-labelledby="inscriptions-title">
+            <span class="bg-dots" aria-hidden="true"></span>
+            <span class="bg-diag" aria-hidden="true"></span>
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Inscriptions 2026</span>
+                    <h2 class="section-title" id="inscriptions-title">Trois espaces. <span class="hl">Trois opportunités.</span></h2>
+                    <p class="lead">Trouvez votre place dans l'aventure Meet The Lead 2026.</p>
+                </div>
+                <div class="spaces">
+                    <article class="space-card reveal" style="--c:var(--teal)">
+                        <div class="space-visual" aria-hidden="true">
+                            <span class="num">01</span><span class="geo-a"></span><span class="geo-b"></span><span class="geo-ring"></span><span class="geo-lines"></span>
+                        </div>
+                        <span class="space-badge" data-space-status="hackathon" hidden></span>
+                        <div class="space-body">
+                            <span class="space-name"><span class="tri" style="--c:var(--teal)"></span>Hackathon</span>
+                            <h3>Imaginez. Innovez. Relevez le défi.</h3>
+                            <p>Trois journées pour imaginer, développer et proposer des solutions innovantes aux défis de l'agriculture et de l'industrie.</p>
+                            <span class="space-date"><i class="far fa-calendar-alt" aria-hidden="true"></i> 26 – 28 novembre 2026</span>
+                            <a class="space-cta" href="hackathon/inscription/" aria-label="S'inscrire au Hackathon">S'inscrire <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </article>
+                    <article class="space-card is-dark reveal" style="--c:var(--yellow);--accent:var(--pink)">
+                        <div class="space-visual" aria-hidden="true">
+                            <span class="num">02</span><span class="geo-a"></span><span class="geo-b"></span><span class="geo-ring"></span><span class="geo-lines"></span>
+                        </div>
+                        <span class="space-badge" data-space-status="africa-impact-awards" hidden></span>
+                        <div class="space-body">
+                            <span class="space-name"><span class="tri" style="--c:var(--yellow)"></span>Africa Impact Awards</span>
+                            <h3>Donnez de la visibilité à votre impact.</h3>
+                            <p>Valorisez vos initiatives et vos projets à impact.</p>
+                            <span class="space-date is-muted"><i class="far fa-calendar-alt" aria-hidden="true"></i> 27 – 28 novembre 2026</span>
+                            <a class="space-cta" href="africa-impact-awards/inscription/" aria-label="Candidater aux Africa Impact Awards">Candidater <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </article>
+                    <article class="space-card reveal" style="--c:var(--blue);--accent:var(--teal)">
+                        <div class="space-visual" aria-hidden="true">
+                            <span class="num">03</span><span class="geo-a"></span><span class="geo-b"></span><span class="geo-ring"></span><span class="geo-lines"></span>
+                        </div>
+                        <span class="space-badge" data-space-status="bridge-to-job" hidden></span>
+                        <div class="space-body">
+                            <span class="space-name"><span class="tri" style="--c:var(--blue)"></span>Bridge to Job</span>
+                            <h3>Votre talent mérite des opportunités.</h3>
+                            <p>Connectez votre talent à de nouvelles opportunités professionnelles.</p>
+                            <span class="space-date is-muted"><i class="far fa-calendar-alt" aria-hidden="true"></i> 27 – 28 novembre 2026</span>
+                            <a class="space-cta" href="bridge-to-job/inscription/" aria-label="Rejoindre Bridge to Job">Rejoindre <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                        </div>
+                    </article>
+                </div>
+                <div class="spaces-foot">
+                    <p>Vous souhaitez simplement assister à l'événement ?</p>
+                    <a class="link-arrow" href="https://forms.gle/ZoBgGsGPZ2y3SVkx7" target="_blank" rel="noopener">Réserver ma place <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </section>
 
         <section class="section" id="a-propos">
             <div class="container about-grid">
@@ -154,7 +228,7 @@
                             <li>Ateliers carrière personnalisés</li>
                             <li>Opportunités locales et internationales</li>
                         </ul>
-                        <a href="https://forms.gle/ZoBgGsGPZ2y3SVkx7" target="_blank" rel="noopener" class="btn btn-blue btn-sm">S'inscrire au Job Day</a>
+                        <a href="bridge-to-job/inscription/" class="btn btn-blue btn-sm">Rejoindre Bridge to Job</a>
                     </article>
                     <article class="feature featured reveal" style="--c:var(--yellow)">
                         <span class="icon"><i class="fas fa-trophy"></i></span>
@@ -166,19 +240,20 @@
                             <li>Prix de l'innovation sociale</li>
                             <li>Réseau des lauréats africains</li>
                         </ul>
-                        <a href="https://forms.gle/HpUKgaKHbWmBSjq28" target="_blank" rel="noopener" class="btn btn-primary btn-sm">Candidater aux Awards 2026</a>
+                        <a href="africa-impact-awards/inscription/" class="btn btn-primary btn-sm">Candidater aux Awards 2026</a>
                     </article>
                     <article class="feature reveal" style="--c:var(--teal)">
                         <span class="icon"><i class="fas fa-code"></i></span>
                         <span class="tag">Innovation ouverte</span>
                         <h3>Hackathon MTL</h3>
+                        <span class="feature-date"><i class="far fa-calendar-alt" aria-hidden="true"></i> 26 – 28 novembre 2026</span>
                         <ul>
                             <li>Compétition d'innovation</li>
-                            <li>Thème : entrepreneuriat digital</li>
+                            <li>Défis : agriculture &amp; industrie</li>
                             <li>Mentorat d'experts</li>
                             <li>Prix et accompagnement des lauréats</li>
                         </ul>
-                        <a href="https://forms.gle/25t1gJt2nKUhwgA96" target="_blank" rel="noopener" class="btn btn-outline btn-sm">S'inscrire au Hackathon</a>
+                        <a href="hackathon/inscription/" class="btn btn-outline btn-sm">S'inscrire au Hackathon</a>
                     </article>
                 </div>
             </div>
@@ -199,7 +274,7 @@
                     <div class="timeline">
                     <details class="session" style="--c:var(--teal)" open>
                         <summary><time>08h30 – 20h00</time><h4>Hackathon Entrepreneuriat &amp; Innovation</h4></summary>
-                        <div class="body"><p><span class="session-tag">Hackathon</span>Compétition d'innovation et d'entrepreneuriat réunissant les talents émergents pour développer des solutions concrètes aux défis du territoire, accompagnés par des mentors experts.</p></div>
+                        <div class="body"><p><span class="session-tag">Hackathon</span>Compétition d'innovation et d'entrepreneuriat réunissant les talents émergents pour développer des solutions concrètes aux défis du territoire, accompagnés par des mentors experts. <strong>Le Hackathon se déroule sur trois jours, du 26 au 28 novembre 2026.</strong></p></div>
                     </details>
                     <details class="session" style="--c:var(--blue)">
                         <summary><time>09h30 – 12h30</time><h4>Job Day – Bridge To Job</h4></summary>
@@ -355,7 +430,48 @@
             </div>
         </section>
 
-        <section class="section">
+        <section class="section partners-section" id="partenaires" aria-labelledby="partenaires-title">
+            <span class="bg-diag" aria-hidden="true"></span>
+            <span class="bg-tri" aria-hidden="true"></span>
+            <span class="bg-ring" aria-hidden="true"></span>
+            <div class="container">
+                <div class="section-head">
+                    <span class="eyebrow">Partenaires &amp; sponsors 2026</span>
+                    <h2 class="section-title" id="partenaires-title">Ils nous font <span class="hl">confiance</span></h2>
+                    <p class="lead">Des institutions, des acteurs engagés et des partenaires qui accompagnent l'aventure Meet The Lead.</p>
+                </div>
+                <!-- Généré depuis assets/js/mtl-data.js -->
+                <div class="partner-wall" data-partner-wall></div>
+                <noscript>
+                    <ul class="footer-links">
+                        <li>Partenaires institutionnels : Centre Régional d'Investissement de l'Oriental, Wilaya de la Région de l'Oriental</li>
+                        <li>Sponsors Gold : Belgique — partenaire du développement, Min Ajliki, APEFE</li>
+                        <li>Partenaire Hackathon : COSUMAR</li>
+                        <li>Sponsor : Sojori</li>
+                    </ul>
+                </noscript>
+                <p class="partners-note">Meet The Lead est organisé par <strong>StartupGrow Foundation</strong>.</p>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top:0" aria-labelledby="rejoindre-title">
+            <div class="container">
+                <div class="join-band reveal">
+                    <div>
+                        <span class="eyebrow">Partenariats</span>
+                        <h2 id="rejoindre-title">Et si vous faisiez partie de l'aventure ?</h2>
+                        <p>Associez votre organisation à Meet The Lead et contribuons ensemble à faire émerger les talents, les idées et les opportunités de demain.</p>
+                        <div class="actions">
+                            <a href="devenir-partenaire/" class="btn btn-primary">Devenir partenaire <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            <a href="contact.html" class="btn btn-ghost-light">Nous contacter</a>
+                        </div>
+                    </div>
+                    <div class="join-art" aria-hidden="true"><span class="t1"></span><span class="t2"></span><span class="t3"></span><span class="ring"></span><span class="lines"></span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" style="padding-top:0">
             <div class="container">
                 <div class="cta-band reveal">
                     <div>
@@ -395,9 +511,15 @@
                 <div>
                     <h4>Participer</h4>
                     <ul class="footer-links">
+                        <li><a href="hackathon/inscription/">Hackathon</a></li>
+                        <li><a href="africa-impact-awards/inscription/">Africa Impact Awards</a></li>
+                        <li><a href="bridge-to-job/inscription/">Bridge to Job</a></li>
                         <li><a href="https://forms.gle/ZoBgGsGPZ2y3SVkx7" target="_blank" rel="noopener">Réserver ma place</a></li>
-                        <li><a href="https://forms.gle/25t1gJt2nKUhwgA96" target="_blank" rel="noopener">Hackathon d’innovation ouverte</a></li>
-                        <li><a href="https://forms.gle/HpUKgaKHbWmBSjq28" target="_blank" rel="noopener">Africa Impact Awards 2026</a></li>
+                    </ul>
+                    <h4 class="footer-sub">Partenariats</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#partenaires">Nos partenaires</a></li>
+                        <li><a href="devenir-partenaire/">Devenir partenaire</a></li>
                     </ul>
                 </div>
                 <div>
@@ -406,7 +528,7 @@
                         <li><i class="fas fa-calendar-alt"></i><span>27 – 28 novembre 2026</span></li>
                         <li><i class="fas fa-map-marker-alt"></i><span>Région de l'Oriental | Nador</span></li>
                         <li><i class="fas fa-envelope"></i><a href="mailto:startupgrowfoundation@gmail.com">startupgrowfoundation@gmail.com</a></li>
-                        <li><i class="fas fa-globe"></i><a href="https://meetthelead.com">meetthelead.com</a></li>
+                        <li><i class="fas fa-globe"></i><a href="https://meet-the-lead.com">meet-the-lead.com</a></li>
                     </ul>
                 </div>
             </div>
@@ -425,6 +547,7 @@
         </div>
     </div>
 
+    <script src="assets/js/mtl-data.js"></script>
     <script src="assets/js/mtl.js"></script>
 </body>
 

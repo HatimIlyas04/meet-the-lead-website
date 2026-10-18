@@ -131,6 +131,223 @@
         document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !modal.hidden) close(); });
     }
 
+    /* ---------- Données centralisées (assets/js/mtl-data.js) ---------- */
+    var MTL = window.MTL || { config: {}, spaces: [], partnerCategories: [], partners: [] };
+    // Préfixe vers la racine du site (pages en sous-dossier : data-root="../../")
+    var ROOT = document.body.getAttribute("data-root") || "";
+    var findSpace = function (id) { return MTL.spaces.filter(function (s) { return s.id === id; })[0]; };
+    var esc = function (str) {
+        return String(str).replace(/[&<>"']/g, function (c) {
+            return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+        });
+    };
+
+    /* ---------- Menu « S'inscrire » ---------- */
+    var regToggle = $(".reg-toggle");
+    var regPanel = $("#reg-panel");
+    if (regToggle && regPanel) {
+        var setReg = function (open) {
+            // Ferme d'abord le menu mobile (avant d'afficher le panneau)
+            if (open && nav && nav.classList.contains("open")) toggle.click();
+            regPanel.hidden = !open;
+            regToggle.setAttribute("aria-expanded", open ? "true" : "false");
+        };
+        regToggle.addEventListener("click", function (e) {
+            e.stopPropagation();
+            setReg(regPanel.hidden);
+            if (!regPanel.hidden) { var first = $("a", regPanel); if (first) first.focus(); }
+        });
+        document.addEventListener("click", function (e) {
+            if (!regPanel.hidden && !regPanel.contains(e.target)) setReg(false);
+        });
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape" && !regPanel.hidden) { setReg(false); regToggle.focus(); }
+        });
+        if (toggle) toggle.addEventListener("click", function () { if (!regPanel.hidden) setReg(false); });
+    }
+
+    /* ---------- Liens vers les formulaires Google ---------- */
+    $$("[data-form-space]").forEach(function (el) {
+        var space = findSpace(el.getAttribute("data-form-space"));
+        if (!space) return;
+        if (space.status === "active") {
+            el.href = space.formUrl;
+            el.target = "_blank";
+            el.rel = "noopener noreferrer";
+            el.setAttribute("aria-label", el.textContent.trim() + " — ouvre le formulaire Google officiel « " + space.formTitle + " » dans un nouvel onglet");
+            el.classList.remove("is-pending");
+        } else {
+            // Pas de lien officiel configuré : aucun bouton actif menant nulle part.
+            var pending = document.createElement("span");
+            pending.className = el.className + " is-pending";
+            pending.setAttribute("role", "status");
+            pending.innerHTML = '<i class="fas fa-hourglass-half" aria-hidden="true"></i> Inscriptions bientôt ouvertes';
+            el.parentNode.replaceChild(pending, el);
+        }
+    });
+    $$("[data-space-pending-note]").forEach(function (el) {
+        var space = findSpace(el.getAttribute("data-space-pending-note"));
+        el.hidden = !space || space.status !== "pending";
+    });
+    $$("[data-space-status]").forEach(function (el) {
+        var space = findSpace(el.getAttribute("data-space-status"));
+        if (space && space.status === "pending") {
+            el.hidden = false;
+            el.textContent = "Ouverture prochaine";
+        }
+    });
+
+    /* ---------- Mur des partenaires ---------- */
+    // Taille optique : surface équivalente quelles que soient les proportions du logo.
+    function logoCell(p, base) {
+        if (!p.logo) {
+            if (window.console) console.warn("[MTL] Logo officiel manquant pour « " + p.name + " » — ajouter le fichier dans assets/img/partners/ puis renseigner mtl-data.js.");
+            return '<li class="partner-cell is-missing" data-missing-asset="' + esc(p.id) + '" style="flex-grow:' + Math.round(base * 1.4) + '">' +
+                '<span class="partner-name">' + esc(p.name) + '</span></li>';
+        }
+        var ratio = p.width / p.height;
+        var w = Math.round(base * Math.sqrt(ratio) * (p.optical || 1));
+        // Cellule proportionnelle à la largeur optique : un logo large n'est pas écrasé
+        return '<li class="partner-cell" style="flex-grow:' + w + '">' +
+            '<img src="' + esc(ROOT + p.logo) + '" alt="' + esc(p.alt || p.name) + '" width="' + p.width + '" height="' + p.height + '"' +
+            ' style="--logo-w:' + w + 'px" loading="lazy" decoding="async"></li>';
+    }
+    function partnersOf(cat) {
+        return MTL.partners.filter(function (p) { return p.category === cat; })
+            .sort(function (a, b) { return a.order - b.order; });
+    }
+    $$("[data-partner-wall]").forEach(function (wall) {
+        wall.innerHTML = MTL.partnerCategories.map(function (cat, i) {
+            var list = partnersOf(cat.id);
+            if (!list.length) return "";
+            var single = list.length === 1;
+            return '<section class="partner-group reveal is-' + cat.id + (single ? " is-single" : "") + '" style="--c:' + cat.color + '" aria-labelledby="pg-' + cat.id + '">' +
+                '<header class="partner-group-head"><span class="pg-num">0' + (i + 1) + '</span>' +
+                '<h3 id="pg-' + cat.id + '">' + esc(cat.label) + '</h3></header>' +
+                '<ul class="partner-logos" style="--cols:' + list.length + '">' +
+                list.map(function (p) { return logoCell(p, single ? 128 : 112); }).join("") +
+                '</ul></section>';
+        }).join("");
+    });
+    // Vitrine d'une seule catégorie (ex. partenaire Hackathon sur la page d'inscription)
+    $$("[data-partner-category]").forEach(function (box) {
+        var list = partnersOf(box.getAttribute("data-partner-category"));
+        box.innerHTML = list.map(function (p) { return logoCell(p, 92); }).join("");
+        box.hidden = !list.length;
+    });
+
+    /* ---------- Formulaire « Devenir partenaire » ---------- */
+    var pForm = $("#partner-form");
+    if (pForm) {
+        var pStatus = $(".form-status", pForm);
+        var pSubmit = $("button[type=submit]", pForm);
+        var pLabel = pSubmit.innerHTML;
+        var startedAt = Date.now();
+        var endpoint = MTL.config.PARTNERSHIP_FORM_ENDPOINT;
+        var recipient = MTL.config.PARTNERSHIP_RECIPIENT_EMAIL;
+        var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+        var showStatus = function (type, html) {
+            pStatus.className = "form-status " + type;
+            pStatus.innerHTML = html;
+        };
+        var mailLink = recipient ? ' Vous pouvez aussi nous écrire à <a href="mailto:' + esc(recipient) + '">' + esc(recipient) + '</a>.' : "";
+
+        if (!endpoint) {
+            pSubmit.disabled = true;
+            showStatus("err", "L'envoi en ligne n'est pas encore activé." + mailLink);
+        }
+
+        var setFieldError = function (field, msg) {
+            var wrap = field.closest(".field");
+            var err = wrap && $(".field-error", wrap);
+            field.setAttribute("aria-invalid", msg ? "true" : "false");
+            if (err) { err.textContent = msg || ""; err.hidden = !msg; }
+        };
+        var validate = function () {
+            var firstBad = null;
+            $$("[data-validate]", pForm).forEach(function (f) {
+                var v = f.type === "checkbox" ? f.checked : f.value.trim();
+                var msg = "";
+                if (f.required && !v) msg = f.getAttribute("data-msg") || "Ce champ est obligatoire.";
+                else if (f.type === "email" && v && !EMAIL_RE.test(v)) msg = "Merci d'indiquer une adresse e-mail valide.";
+                else if (f.type === "tel" && v && !/^[+()\d\s.-]{6,20}$/.test(v)) msg = "Merci d'indiquer un numéro de téléphone valide.";
+                else if (f.maxLength > 0 && typeof v === "string" && v.length > f.maxLength) msg = "Texte trop long.";
+                setFieldError(f, msg);
+                if (msg && !firstBad) firstBad = f;
+            });
+            return firstBad;
+        };
+        $$("[data-validate]", pForm).forEach(function (f) {
+            f.addEventListener(f.type === "checkbox" || f.tagName === "SELECT" ? "change" : "blur", function () {
+                if (f.getAttribute("aria-invalid") === "true" || f.value) validate();
+            });
+        });
+
+        pForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            if (!endpoint || pSubmit.disabled) return;
+            var bad = validate();
+            if (bad) {
+                showStatus("err", "Merci de corriger les champs signalés.");
+                bad.focus();
+                return;
+            }
+            // Anti-spam : champ piège + délai minimal de saisie
+            if ($("[name=_honey]", pForm).value || Date.now() - startedAt < 3000) {
+                showStatus("err", "Votre demande n'a pas pu être envoyée. Merci de réessayer dans quelques secondes.");
+                return;
+            }
+            var d = new FormData(pForm);
+            var val = function (k) { return String(d.get(k) || "").trim(); };
+            var payload = {
+                "Nom": val("nom"),
+                "Organisation": val("organisation"),
+                "Fonction": val("fonction"),
+                "E-mail": val("email"),
+                "Téléphone": val("telephone") || "—",
+                "Type de partenariat": val("type"),
+                "Message": val("message"),
+                "Consentement": "Oui",
+                _subject: "Nouvelle demande de partenariat — Meet The Lead 2026",
+                _replyto: val("email"),
+                _template: "table",
+                _captcha: "false",
+                _honey: ""
+            };
+
+            pSubmit.disabled = true;
+            pSubmit.innerHTML = '<span class="spinner" aria-hidden="true"></span> Envoi en cours…';
+            pForm.setAttribute("aria-busy", "true");
+            showStatus("", "");
+
+            fetch(endpoint, {
+                method: "POST",
+                headers: { "Content-Type": "application/json", "Accept": "application/json" },
+                body: JSON.stringify(payload)
+            }).then(function (res) {
+                return res.json().catch(function () { return {}; }).then(function (json) {
+                    // Succès uniquement si le service confirme la prise en charge du message.
+                    var ok = res.ok && (json.success === true || json.success === "true");
+                    if (!ok) throw new Error(json.message || ("HTTP " + res.status));
+                });
+            }).then(function () {
+                pForm.reset();
+                $$("[aria-invalid]", pForm).forEach(function (f) { f.setAttribute("aria-invalid", "false"); });
+                pForm.classList.add("is-sent");
+                showStatus("ok", '<i class="fas fa-check-circle" aria-hidden="true"></i> Merci pour votre intérêt pour Meet The Lead. Votre demande de partenariat a bien été transmise à notre équipe.');
+                pStatus.focus();
+            }).catch(function (err) {
+                if (window.console) console.error("[MTL] Envoi partenariat :", err);
+                showStatus("err", "Votre demande n'a pas pu être envoyée pour le moment." + mailLink);
+            }).then(function () {
+                pSubmit.disabled = false;
+                pSubmit.innerHTML = pLabel;
+                pForm.removeAttribute("aria-busy");
+            });
+        });
+    }
+
     /* ---------- Apparition au scroll ---------- */
     var reveals = $$(".reveal");
     if ("IntersectionObserver" in window) {
