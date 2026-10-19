@@ -543,3 +543,18 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (prefers-reduced-motion: reduce) {
     .hk-chips li:hover { transform: none; }
 }
+
+/* Hackathon : appel final */
+.hk-cta-section { padding-top: 0; }
+.hk-profiles .lead { margin-bottom: 0; }
+
+/* Partenaires mobile : tuiles blanches à filet (logos non transparents bien intégrés) */
+@media (max-width: 600px) {
+    .partners-section .bg-tri, .partners-section .bg-diag, .partners-section .bg-ring { display: none; }
+    .partner-cell, .partner-group.is-gold .partner-cell { background: #fff; border: 1px solid var(--line); }
+    .partner-group.is-institutionnels .partner-cell { min-height: 124px; }
+    .partner-group.is-institutionnels .partner-cell img { max-height: 92px; width: min(calc(var(--logo-w, 160px) * .95), 100%); }
+}
+@media (max-width: 560px) {
+    .join-band .actions .btn { width: 100%; white-space: normal; text-align: center; padding-inline: 20px; letter-spacing: .04em; }
+}
