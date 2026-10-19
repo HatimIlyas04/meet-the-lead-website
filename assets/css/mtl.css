@@ -600,3 +600,7 @@ button { font: inherit; cursor: pointer; }
     .speakers { grid-template-columns: 1fr; }
     .hero-actions .btn { width: 100%; }
 }
+
+/* Copyright : léger effet au survol du lien Viti.fy */
+.footer-bottom a strong { transition: color .2s; }
+.footer-bottom a:hover strong, .footer-bottom a:focus-visible strong { color: var(--yellow); }
