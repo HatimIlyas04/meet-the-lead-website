@@ -558,3 +558,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 560px) {
     .join-band .actions .btn { width: 100%; white-space: normal; text-align: center; padding-inline: 20px; letter-spacing: .04em; }
 }
+
+/* Menu mobile : les entrées « S'inscrire » gardent leur mise en ligne (numéro, nom, flèche) */
+.main-nav .mobile-cta .reg-item { display: grid; border-radius: 10px; }
+.main-nav .mobile-cta .btn { display: flex; justify-content: center; color: #fff; border-radius: 999px; font-weight: 600; }
