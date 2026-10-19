@@ -15,9 +15,6 @@
        puis cliquer sur « Activate Form » dans l'e-mail reçu par FormSubmit
        (startupgrowfoundation@gmail.com). Tant que ce n'est pas fait, le site
        affiche un message d'erreur (jamais de faux succès).
-   [ ] Logo manquant : Wilaya de la Région de l'Oriental (blason de l'affiche
-       officielle : bouclier rouge, chevron vert, aigle). Déposer le fichier
-       officiel dans assets/img/partners/ puis renseigner logo / width / height.
    ========================================================= */
 (function () {
     "use strict";
@@ -103,7 +100,7 @@
           alt: "Centre Régional d'Investissement de la Région de l'Oriental (CRI Oriental)" },
         { id: "wilaya-oriental", name: "Wilaya de la Région de l'Oriental", short: "Wilaya de l'Oriental",
           category: "institutionnels", order: 2,
-          logo: null, width: 0, height: 0, optical: 1,
+          logo: "assets/img/partners/wilaya-oriental.png", width: 203, height: 240, optical: 1.05,
           alt: "Wilaya de la Région de l'Oriental" },
 
         { id: "belgique-cooperation", name: "Belgique — partenaire du développement", short: "Belgique",
@@ -135,22 +132,36 @@
           alt: "StartupGrow Foundation" }
     ];
 
-    // Speakers confirmés de la 8ème édition (2026). Affichage : photo, nom, fonction — rien d'autre.
+    // Speakers confirmés de la 8ème édition (2026), dans l'ordre du visuel officiel « Speakers 2026 ».
+    // Affichage : photo, nom, fonction (role + organisation), drapeau. Rien d'autre.
     // Ne publier que des intervenants confirmés (confirmed: true).
     var speakers2026 = [
-        { id: "zineb-hatim", name: "Zineb Hatim", function: "Présidente Maroc Entrepreneurs",
-          image: "assets/img/speakers-2026/zineb-hatim.jpg", width: 640, height: 800,
-          edition: 2026, confirmed: true, displayOrder: 1 },
-        { id: "rachid-ressani", name: "Rachid Ressani", function: "Président APEBI",
-          image: "assets/img/speakers-2026/rachid-ressani.jpg", width: 544, height: 680,
-          edition: 2026, confirmed: true, displayOrder: 2 },
-        { id: "mohamed-bachiri", name: "Mohamed Bachiri", function: "Vice-Président Général CGEM",
-          image: "assets/img/speakers-2026/mohamed-bachiri.jpg", width: 392, height: 490,
-          edition: 2026, confirmed: true, displayOrder: 3 },
-        { id: "anouar-alaoui-ismaili", name: "Anouar Alaoui Ismaili", function: "Directeur Général Maroc PME",
-          image: "assets/img/speakers-2026/anouar-alaoui-ismaili.jpg", width: 640, height: 800,
-          edition: 2026, confirmed: true, displayOrder: 4 }
+        { id: "ryad-mezzour", name: "Ryad Mezzour",
+          role: "Ministre de l'Industrie, du Commerce, de l'Investissement et de l'Inclusion économique", organization: "",
+          country: "ma", color: "var(--pink)", displayOrder: 1 },
+        { id: "mohamed-bachiri", name: "Mohamed Bachiri", role: "Vice-Président Général", organization: "CGEM",
+          country: "ma", color: "var(--blue)", displayOrder: 2 },
+        { id: "anouar-alaoui-ismaili", name: "Anouar Alaoui Ismaili", role: "Directeur Général", organization: "Maroc PME",
+          country: "ma", color: "var(--teal)", displayOrder: 3 },
+        { id: "unielle-oupolo", name: "Unielle Oupolo", role: "Épouse de Son Excellence l'Ambassadeur du Gabon", organization: "Présidente du Cercle Diplomatique",
+          country: "ga", color: "var(--purple)", displayOrder: 4 },
+        { id: "tawfiq-gouach", name: "Tawfiq Gouach", role: "Fondateur & CEO", organization: "SOJORI",
+          country: "ma", color: "var(--yellow)", displayOrder: 5 },
+        { id: "zineb-hatim", name: "Zineb Hatim", role: "Présidente", organization: "Maroc Entrepreneurs",
+          country: "ma", color: "var(--pink)", displayOrder: 6 },
+        { id: "rachid-ressani", name: "Rachid Ressani", role: "Président", organization: "APEBI",
+          country: "ma", color: "var(--blue)", displayOrder: 7 }
     ];
+    speakers2026.forEach(function (s) {
+        s.image = "assets/img/speakers-2026/" + s.id + ".jpg";
+        s.width = 560; s.height = 560;
+        s.edition = 2026; s.confirmed = true;
+    });
+
+    var countries = {
+        ma: { name: "Maroc", flag: "assets/img/flags/ma.svg" },
+        ga: { name: "Gabon", flag: "assets/img/flags/ga.svg" }
+    };
 
     window.MTL = {
         config: config,
@@ -158,6 +169,7 @@
         spaces: spaces,
         partnerCategories: partnerCategories,
         partners: partners,
-        speakers2026: speakers2026
+        speakers2026: speakers2026,
+        countries: countries
     };
 })();

@@ -239,7 +239,7 @@
     });
 
     /* ---------- New Speakers 2026 ---------- */
-    // Chaque intervenant : photo, nom, fonction. Rien d'autre.
+    // Chaque intervenant : photo, nom, fonction, drapeau. Rien d'autre.
     $$("[data-speakers-2026]").forEach(function (box) {
         var list = (MTL.speakers2026 || []).filter(function (s) { return s.confirmed && s.edition === 2026; })
             .sort(function (a, b) { return a.displayOrder - b.displayOrder; });
@@ -247,12 +247,15 @@
             box.outerHTML = '<p class="ns-soon">New Speakers 2026 — <span>Coming soon</span></p>';
             return;
         }
-        var accents = ["var(--pink)", "var(--teal)", "var(--yellow)", "var(--blue)", "var(--purple)"];
-        box.innerHTML = list.map(function (s, i) {
-            return '<li class="ns-item reveal" style="--c:' + accents[i % accents.length] + '">' +
-                '<figure class="ns-photo"><img src="' + esc(ROOT + s.image) + '" alt="' + esc(s.name) + '" width="' + s.width + '" height="' + s.height + '" loading="lazy" decoding="async"></figure>' +
+        var countries = MTL.countries || {};
+        box.innerHTML = list.map(function (s) {
+            var c = countries[s.country];
+            return '<li class="ns-item reveal" style="--c:' + s.color + '">' +
+                '<figure class="ns-photo"><span class="ns-ring" aria-hidden="true"></span><img src="' + esc(ROOT + s.image) + '" alt="' + esc(s.name) + '" width="' + s.width + '" height="' + s.height + '" loading="lazy" decoding="async"></figure>' +
                 '<h3 class="ns-name">' + esc(s.name) + '</h3>' +
-                '<p class="ns-role">' + esc(s.function) + '</p></li>';
+                '<p class="ns-role">' + esc(s.role) + (s.organization ? '<b>' + esc(s.organization) + '</b>' : '') + '</p>' +
+                (c ? '<img class="ns-flag" src="' + esc(ROOT + c.flag) + '" alt="' + esc(c.name) + '" title="' + esc(c.name) + '" width="24" height="16">' : '') +
+                '</li>';
         }).join("");
     });
     // Vitrine d'une seule catégorie (ex. partenaire Hackathon sur la page d'inscription)
@@ -365,7 +368,13 @@
                 pStatus.focus();
             }).catch(function (err) {
                 if (window.console) console.error("[MTL] Envoi partenariat :", err);
-                showStatus("err", "Votre demande n'a pas pu être envoyée pour le moment." + mailLink);
+                // Solution de repli : e-mail pré-rempli avec la demande saisie (rien n'est perdu)
+                var body = ["Nom", "Organisation", "Fonction", "E-mail", "Téléphone", "Type de partenariat", "Message"]
+                    .map(function (k) { return k + " : " + payload[k]; }).join("\n");
+                var href = "mailto:" + recipient + "?subject=" + encodeURIComponent(payload._subject) + "&body=" + encodeURIComponent(body);
+                showStatus("err", "L'envoi automatique n'a pas abouti. Votre demande n'est pas perdue : envoyez-la directement par e-mail, elle est déjà rédigée." +
+                    '<a class="btn btn-primary btn-sm form-fallback" href="' + esc(href) + '"><i class="fas fa-envelope" aria-hidden="true"></i> Envoyer ma demande par e-mail</a>' +
+                    '<small>Adresse : ' + esc(recipient) + '</small>');
             }).then(function () {
                 pSubmit.disabled = false;
                 pSubmit.innerHTML = pLabel;
