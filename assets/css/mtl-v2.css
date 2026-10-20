@@ -393,64 +393,105 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .organizer-block .partner-cell { min-height: 130px; }
 .organizer-block .partner-cell img { max-height: 76px; }
 
-/* ---------- Speakers 2026 (inspiré du visuel officiel « Speakers 2026 ») ---------- */
-.new-speakers { position: relative; overflow: hidden; background: #fff; }
+/* ---------- Speakers 2026 — « The voices of 2026 » ----------
+   Portraits en arche + filet décalé à la couleur de chaque intervenant.
+   Volontairement distinct de Past Speakers (cartes rectangulaires sur fond sombre). */
+.new-speakers { position: relative; overflow: hidden; background: #fff; padding-block: 110px 120px; }
+.new-speakers::before { content: ""; position: absolute; inset: 0 0 auto; height: 420px; background: linear-gradient(180deg, var(--bg-soft), #fff); pointer-events: none; }
 .new-speakers .container { position: relative; }
-.ns-bg-dots { position: absolute; left: 3%; bottom: 90px; width: 150px; height: 96px; background-image: radial-gradient(var(--blue) 2.2px, transparent 2.6px); background-size: 26px 26px; opacity: .7; pointer-events: none; }
-.ns-bg-tri { position: absolute; right: 4%; top: 230px; width: 0; height: 0; border-top: 20px solid transparent; border-bottom: 20px solid transparent; border-left: 36px solid var(--purple); pointer-events: none; }
-.ns-bg-lines { position: absolute; right: 3%; bottom: 70px; width: 130px; height: 140px; pointer-events: none; }
-.ns-bg-lines i { position: absolute; bottom: 0; width: 10px; height: 100%; border-radius: 10px; transform: rotate(28deg); transform-origin: bottom; }
-.ns-bg-lines i:nth-child(1) { left: 10px; height: 80%; background: var(--teal); }
-.ns-bg-lines i:nth-child(2) { left: 50px; background: var(--yellow); }
-.ns-bg-lines i:nth-child(3) { left: 90px; height: 85%; background: var(--pink); }
+.ns-bg-dots { position: absolute; right: 4%; top: 64px; width: 132px; height: 84px; background-image: radial-gradient(rgba(60,131,187,.55) 1.6px, transparent 2px); background-size: 16px 16px; pointer-events: none; }
+.ns-bg-tri { display: none; }
+.ns-bg-lines { position: absolute; left: -26px; bottom: 120px; width: 90px; height: 120px; pointer-events: none; }
+.ns-bg-lines i { position: absolute; bottom: 0; width: 6px; height: 100%; border-radius: 6px; transform: rotate(28deg); transform-origin: bottom; }
+.ns-bg-lines i:nth-child(1) { left: 10px; height: 75%; background: var(--teal); }
+.ns-bg-lines i:nth-child(2) { left: 34px; background: var(--yellow); }
+.ns-bg-lines i:nth-child(3) { left: 58px; height: 85%; background: var(--pink); }
 
-.ns-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 18px 30px; padding-bottom: 28px; margin-bottom: 60px; border-bottom: 1px solid var(--line); }
-.ns-kicker { display: inline-flex; align-items: center; gap: 12px; font-size: 13px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--ink); }
-.ns-kicker::before { content: ""; width: 34px; height: 3px; border-radius: 3px; background: var(--pink); }
-.ns-kicker sup { font-size: .65em; }
-.ns-title { margin: 10px 0 0; font-size: clamp(40px, 6vw, 72px); font-weight: 800; line-height: 1; letter-spacing: -.02em; text-transform: uppercase; color: var(--black); }
+/* En-tête */
+.ns-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 18px 40px; margin-bottom: 72px; }
+.ns-kicker { display: inline-flex; align-items: center; gap: 12px; font-size: 12.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
+.ns-kicker::before { content: ""; width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 10px solid var(--pink); }
+.ns-title { position: relative; margin: 14px 0 0; font-size: clamp(44px, 6.4vw, 84px); font-weight: 800; line-height: .92; letter-spacing: -.035em; text-transform: uppercase; color: var(--black); }
 .ns-title span { color: var(--pink); }
-.ns-when { margin: 0; text-align: right; }
-.ns-when b { display: block; font-size: clamp(20px, 2.4vw, 30px); font-weight: 800; line-height: 1.15; color: var(--blue); }
-.ns-when span { display: inline-flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
-.ns-when i { color: var(--blue); font-size: 15px; }
+.ns-when { margin: 0; padding-left: 22px; border-left: 3px solid var(--blue); text-align: left; }
+.ns-when b { display: block; font-size: clamp(18px, 2vw, 24px); font-weight: 800; line-height: 1.2; color: var(--blue); letter-spacing: -.01em; }
+.ns-when span { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
+.ns-when i { color: var(--blue); font-size: 13px; }
 
-.ns-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 60px 28px; }
-.ns-item { flex: 0 1 calc(25% - 21px); max-width: 300px; display: flex; flex-direction: column; align-items: center; text-align: center; }
-.ns-photo { position: relative; width: min(224px, 100%); aspect-ratio: 1; margin: 0 0 26px; padding: 11px; }
-.ns-ring { position: absolute; inset: 0; border-radius: 50%; border: 3px solid var(--c); transition: transform .9s cubic-bezier(.2,.7,.2,1); }
-/* Point d'accent sur l'anneau, comme sur le visuel officiel */
-.ns-ring::after { content: ""; position: absolute; right: 9%; bottom: 7%; width: 16px; height: 16px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 4px #fff; }
-.ns-photo img { position: relative; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; background: var(--bg-soft); transition: transform .6s cubic-bezier(.2,.7,.2,1); }
-.ns-name { display: flex; flex-direction: column; align-items: center; margin: 0 0 14px; font-size: 19px; font-weight: 800; line-height: 1.2; letter-spacing: .01em; text-transform: uppercase; color: var(--black); }
-.ns-name::after { content: ""; width: 34px; height: 3px; margin-top: 12px; border-radius: 3px; background: var(--c); transition: width .45s cubic-bezier(.2,.7,.2,1); }
-.ns-role { margin: 0 0 14px; font-size: 14.5px; line-height: 1.5; color: var(--muted); }
-.ns-role b { display: block; font-weight: 500; color: var(--ink); }
-.ns-flag { display: block; width: 24px; height: 16px; margin-top: auto; box-shadow: 0 0 0 1px rgba(22,21,28,.08); }
-.ns-item:hover .ns-ring { transform: rotate(-40deg); }
-.ns-item:hover .ns-photo img { transform: scale(1.03); }
-.ns-item:hover .ns-name::after { width: 64px; }
+/* Galerie : 4 + 3 centrés */
+.ns-grid { --gap-x: 44px; display: flex; flex-wrap: wrap; justify-content: center; gap: 64px var(--gap-x); }
+.ns-item { position: relative; display: flex; flex-direction: column; flex: 0 0 calc((100% - 3 * var(--gap-x)) / 4); min-width: 0; }
+
+/* Portrait en arche */
+.ns-photo { position: relative; margin: 0 0 26px; padding: 0 12px 12px 0; }
+.ns-photo::before { /* filet décalé */
+    content: ""; position: absolute; inset: 12px 0 0 12px; border: 1.5px solid var(--c);
+    border-radius: 999px 999px 4px 4px; transition: transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.ns-photo::after { /* triangle d'accent */
+    content: ""; position: absolute; right: -2px; bottom: 34px; width: 0; height: 0;
+    border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 15px solid var(--c);
+    transition: transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.ns-frame { position: relative; z-index: 1; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 999px 999px 4px 4px; background: var(--bg-soft); }
+.ns-frame picture, .ns-frame img { display: block; width: 100%; height: 100%; }
+.ns-frame img { object-fit: cover; object-position: center 22%; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+
+/* Texte */
+.ns-name { margin: 0 0 10px; padding-left: 14px; border-left: 3px solid var(--c); font-size: 18px; font-weight: 800; line-height: 1.2; letter-spacing: .02em; text-transform: uppercase; color: var(--black); text-wrap: balance; transition: color .3s; }
+.ns-role { margin: 0 0 16px; padding-left: 17px; font-size: 14px; font-weight: 400; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
+.ns-role b { display: block; margin-top: 2px; font-weight: 600; color: var(--ink); }
+.ns-flag { display: block; width: 22px; height: 15px; margin: auto 0 0 17px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(22,21,28,.1); }
+
+/* Interactions (souris) */
+@media (hover: hover) {
+    .ns-item:hover .ns-photo::before { transform: translate(-6px, -6px); }
+    .ns-item:hover .ns-photo::after { transform: translateX(6px); }
+    .ns-item:hover .ns-frame img { transform: scale(1.045); }
+    .ns-item:hover .ns-name { color: var(--c); }
+}
+/* Apparition échelonnée */
+.ns-item.reveal { transition-delay: calc(var(--i, 0) * 70ms); }
 .ns-soon { margin: 0; padding: 40px 0; font-size: clamp(22px, 3vw, 32px); font-weight: 800; text-transform: uppercase; color: var(--ink); text-align: center; }
 .ns-soon span { color: var(--pink); }
 
-@media (max-width: 991px) {
-    .ns-item { flex-basis: calc(33.333% - 19px); }
-    .ns-bg-tri { top: 180px; }
+@media (max-width: 1199px) {
+    .ns-grid { --gap-x: 32px; }
+    .ns-name { font-size: 16.5px; }
 }
+/* Tablette : 3 + 3 + 1 serait déséquilibré → 2 colonnes larges, dernier centré */
+@media (max-width: 991px) {
+    .new-speakers { padding-block: 90px 100px; }
+    .ns-head { grid-template-columns: 1fr; margin-bottom: 56px; }
+    .ns-grid { --gap-x: 40px; max-width: 640px; margin: 0 auto; row-gap: 56px; }
+    .ns-item { flex-basis: calc((100% - var(--gap-x)) / 2); }
+}
+/* Mobile : galerie éditoriale 2 colonnes, texte lisible, presse tactile */
 @media (max-width: 600px) {
-    .ns-head { margin-bottom: 40px; padding-bottom: 22px; }
-    .ns-when { text-align: left; }
-    .ns-grid { gap: 40px 18px; }
-    .ns-item { flex-basis: calc(50% - 9px); }
-    .ns-photo { width: min(156px, 100%); padding: 8px; margin-bottom: 18px; }
-    .ns-ring::after { width: 12px; height: 12px; box-shadow: 0 0 0 3px #fff; }
-    .ns-name { font-size: 15px; margin-bottom: 10px; }
-    .ns-name::after { margin-top: 9px; width: 26px; }
-    .ns-role { font-size: 13px; line-height: 1.45; }
-    .ns-bg-tri, .ns-bg-lines, .ns-bg-dots { display: none; }
+    .new-speakers { padding-block: 72px 80px; }
+    .new-speakers::before { height: 260px; }
+    .ns-bg-dots { top: 40px; right: 16px; width: 80px; height: 52px; opacity: .7; }
+    .ns-bg-lines { display: none; }
+    .ns-head { margin-bottom: 40px; gap: 18px; }
+    .ns-title { font-size: clamp(42px, 13vw, 54px); }
+    .ns-when { padding-left: 14px; }
+    .ns-grid { --gap-x: 16px; row-gap: 40px; }
+    .ns-photo { margin-bottom: 16px; padding: 0 8px 8px 0; }
+    .ns-photo::before { inset: 8px 0 0 8px; border-width: 1.25px; }
+    .ns-photo::after { bottom: 22px; border-top-width: 6px; border-bottom-width: 6px; border-left-width: 10px; }
+    .ns-name { margin-bottom: 8px; padding-left: 10px; border-left-width: 2.5px; font-size: 14.5px; letter-spacing: .01em; }
+    .ns-role { margin-bottom: 12px; padding-left: 12.5px; font-size: 12.75px; line-height: 1.5; }
+    .ns-flag { margin-left: 12.5px; width: 20px; height: 14px; }
+    .ns-item:active .ns-frame img { transform: scale(1.03); transition-duration: .2s; }
+}
+@media (max-width: 374px) {
+    .ns-grid { --gap-x: 12px; }
+    .ns-name { font-size: 13.5px; }
+    .ns-role { font-size: 12.25px; }
 }
 @media (prefers-reduced-motion: reduce) {
-    .ns-item:hover .ns-ring, .ns-item:hover .ns-photo img { transform: none; }
+    .ns-item.reveal { transition-delay: 0s; }
+    .ns-item:hover .ns-photo::before, .ns-item:hover .ns-photo::after, .ns-item:hover .ns-frame img, .ns-item:active .ns-frame img { transform: none; }
 }
 
 /* ---------- Logo Meet The Lead transparent ---------- */
