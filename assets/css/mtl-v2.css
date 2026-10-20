@@ -603,3 +603,45 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 /* Menu mobile : les entrées « S'inscrire » gardent leur mise en ligne (numéro, nom, flèche) */
 .main-nav .mobile-cta .reg-item { display: grid; border-radius: 10px; }
 .main-nav .mobile-cta .btn { display: flex; justify-content: center; color: #fff; border-radius: 999px; font-weight: 600; }
+
+/* Speakers 2026 : plusieurs fonctions (une par bloc) */
+.ns-role > span { display: block; }
+.ns-role > span + span { margin-top: 8px; }
+
+/* ---------- Past Speakers : même langage que Speakers 2026 (arche + filet), en plus sobre ----------
+   Le fond sombre (accueil) et le tag « Speaker MTL » restent ce qui les distingue. */
+.speakers { gap: 48px 32px; }
+.speaker { position: relative; display: flex; flex-direction: column; --c: var(--pink); }
+.speaker:nth-child(4n+2) { --c: var(--blue); }
+.speaker:nth-child(4n+3) { --c: var(--teal); }
+.speaker:nth-child(4n+4) { --c: var(--yellow); }
+.speaker::before { /* filet décalé en arche */
+    content: ""; position: absolute; left: 10px; top: 10px; width: calc(100% - 10px); aspect-ratio: 4 / 5;
+    border: 1.5px solid var(--c); border-radius: 999px 999px 4px 4px; opacity: .8;
+    transition: transform .6s cubic-bezier(.2,.7,.2,1);
+}
+.speaker .photo { width: calc(100% - 10px); aspect-ratio: 4 / 5; margin-bottom: 30px; border-radius: 999px 999px 4px 4px; background: rgba(255,255,255,.06); }
+.speaker .photo::after { display: none; }
+.speaker .photo img { object-position: center 18%; }
+.speaker .edition-tag { top: auto; bottom: 12px; left: 12px; padding: 3px 10px; font-size: 11px; letter-spacing: .04em; border-radius: 4px; background: var(--c); color: #fff; backdrop-filter: none; }
+.speaker:nth-child(4n+4) .edition-tag { color: var(--black); }
+.speaker h3 { margin: 0 0 8px; padding-left: 12px; border-left: 3px solid var(--c); font-size: 16.5px; font-weight: 800; letter-spacing: .02em; text-transform: uppercase; line-height: 1.25; text-wrap: balance; }
+.speaker p { padding-left: 15px; text-wrap: pretty; }
+@media (hover: hover) {
+    .speaker:hover::before { transform: translate(-5px, -5px); }
+}
+@media (max-width: 680px) {
+    .speakers { grid-template-columns: 1fr 1fr; gap: 36px 16px; }
+    .speaker::before { left: 7px; top: 7px; width: calc(100% - 7px); }
+    .speaker .photo { width: calc(100% - 7px); margin-bottom: 20px; }
+    .speaker .edition-tag { bottom: 8px; left: 8px; font-size: 9.5px; padding: 2px 7px; }
+    .speaker h3 { padding-left: 9px; border-left-width: 2.5px; font-size: 13.5px; }
+    .speaker p { padding-left: 11.5px; font-size: 12.5px; }
+}
+/* Toujours 2 par ligne sur mobile, même en très petite largeur */
+@media (max-width: 400px) {
+    .speakers { grid-template-columns: 1fr 1fr; gap: 32px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .speaker:hover::before { transform: none; }
+}

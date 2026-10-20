@@ -251,14 +251,16 @@
         box.innerHTML = list.map(function (s, i) {
             var c = countries[s.country];
             var img = ROOT + s.image;
+            var titles = s.titles || [{ role: s.role, organization: s.organization }];
+            var plain = titles.map(function (t) { return t.role + (t.organization ? ", " + t.organization : ""); }).join(" ; ");
             var v = "?v=" + (MTL.assetsVersion || "1");
             return '<li class="ns-item reveal" style="--c:' + s.color + ';--i:' + i + '">' +
                 '<figure class="ns-photo"><span class="ns-frame"><picture>' +
                 '<source type="image/webp" srcset="' + esc(img.replace(/\.jpg$/, ".webp") + v) + '">' +
-                '<img src="' + esc(img + v) + '" alt="' + esc(s.name + ", " + s.role + (s.organization ? ", " + s.organization : "")) + '" width="' + s.width + '" height="' + s.height + '" loading="lazy" decoding="async">' +
+                '<img src="' + esc(img + v) + '" alt="' + esc(s.name + ", " + plain) + '" width="' + s.width + '" height="' + s.height + '" loading="lazy" decoding="async">' +
                 '</picture></span></figure>' +
                 '<h3 class="ns-name">' + esc(s.name) + '</h3>' +
-                '<p class="ns-role">' + esc(s.role) + (s.organization ? '<b>' + esc(s.organization) + '</b>' : '') + '</p>' +
+                '<p class="ns-role">' + titles.map(function (t) { return '<span>' + esc(t.role) + (t.organization ? '<b>' + esc(t.organization) + '</b>' : '') + '</span>'; }).join("") + '</p>' +
                 (c ? '<img class="ns-flag" src="' + esc(ROOT + c.flag) + '" alt="' + esc(c.name) + '" title="' + esc(c.name) + '" width="24" height="16">' : '') +
                 '</li>';
         }).join("");

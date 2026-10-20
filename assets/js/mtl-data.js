@@ -134,12 +134,14 @@
 
     // Speakers confirmés de la 8ème édition (2026), dans l'ordre du visuel officiel « Speakers 2026 ».
     // Affichage : photo, nom, fonction (role + organisation), drapeau. Rien d'autre.
+    // Plusieurs fonctions : titles: [{ role, organization }, ...] (une ligne chacune).
     // Ne publier que des intervenants confirmés (confirmed: true).
     var speakers2026 = [
         { id: "ryad-mezzour", name: "Ryad Mezzour",
           role: "Ministre de l'Industrie, du Commerce, de l'Investissement et de l'Inclusion économique", organization: "",
           country: "ma", color: "var(--pink)", displayOrder: 1 },
-        { id: "mohamed-bachiri", name: "Mohamed Bachiri", role: "Vice-Président Général", organization: "CGEM",
+        { id: "mohamed-bachiri", name: "Mohamed Bachiri",
+          titles: [{ role: "Directeur Général", organization: "Renault Group Maroc" }, { role: "Vice-Président Général", organization: "CGEM" }],
           country: "ma", color: "var(--blue)", displayOrder: 2 },
         { id: "anouar-alaoui-ismaili", name: "Anouar Alaoui Ismaili", role: "Directeur Général", organization: "Maroc PME",
           country: "ma", color: "var(--teal)", displayOrder: 3 },
