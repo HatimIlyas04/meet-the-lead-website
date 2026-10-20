@@ -154,7 +154,7 @@
     ];
     speakers2026.forEach(function (s) {
         s.image = "assets/img/speakers-2026/" + s.id + ".jpg";
-        s.width = 560; s.height = 560;
+        s.width = 560; s.height = 700; // portraits 4:5
         s.edition = 2026; s.confirmed = true;
     });
 
@@ -163,7 +163,11 @@
         ga: { name: "Gabon", flag: "assets/img/flags/ga.svg" }
     };
 
+    // À incrémenter quand une photo est remplacée sous le même nom (force le rechargement)
+    var assetsVersion = "7";
+
     window.MTL = {
+        assetsVersion: assetsVersion,
         config: config,
         dates: dates,
         spaces: spaces,
