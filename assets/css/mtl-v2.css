@@ -645,3 +645,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (prefers-reduced-motion: reduce) {
     .speaker:hover::before { transform: none; }
 }
+
+/* Africa Impact Awards : accroche de la page de nomination */
+.reg-hero .reg-lead { margin: -6px 0 22px; font-size: clamp(20px, 2.6vw, 28px); font-weight: 700; line-height: 1.25; color: #fff; }
+.reg-hero h1 + .reg-lead { max-width: 620px; }
+.form-status.pending { padding: 14px 16px; border-radius: 6px; font-size: 15px; background: var(--bg-soft); border: 1px solid var(--line); color: var(--ink); }
+.form-status .form-fallback { max-width: 100%; white-space: normal; text-align: center; }
+@media (max-width: 480px) { .form-status .form-fallback { display: flex; width: 100%; } }

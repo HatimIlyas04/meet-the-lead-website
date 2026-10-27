@@ -281,6 +281,10 @@
         var startedAt = Date.now();
         var endpoint = MTL.config.PARTNERSHIP_FORM_ENDPOINT;
         var recipient = MTL.config.PARTNERSHIP_RECIPIENT_EMAIL;
+        var sending = false; // verrou anti double envoi
+        var MSG_SENDING = "Envoi de votre demande en cours…";
+        var MSG_OK = "Votre demande de partenariat a bien été envoyée. Merci pour votre intérêt ! Notre équipe vous contactera prochainement.";
+        var MSG_FAIL = "L'envoi de votre demande a échoué. Veuillez réessayer ou nous contacter à " + recipient + ".";
         var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
         var showStatus = function (type, html) {
@@ -322,7 +326,7 @@
 
         pForm.addEventListener("submit", function (e) {
             e.preventDefault();
-            if (!endpoint || pSubmit.disabled) return;
+            if (!endpoint || sending) return;
             var bad = validate();
             if (bad) {
                 showStatus("err", "Merci de corriger les champs signalés.");
@@ -352,15 +356,21 @@
                 _honey: ""
             };
 
+            sending = true;
             pSubmit.disabled = true;
-            pSubmit.innerHTML = '<span class="spinner" aria-hidden="true"></span> Envoi en cours…';
+            pSubmit.innerHTML = '<span class="spinner" aria-hidden="true"></span> ' + MSG_SENDING;
             pForm.setAttribute("aria-busy", "true");
-            showStatus("", "");
+            showStatus("pending", MSG_SENDING);
+
+            // Délai maximal : pas d'attente infinie si le service ne répond pas
+            var ctrl = window.AbortController ? new AbortController() : null;
+            var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 20000) : null;
 
             fetch(endpoint, {
                 method: "POST",
                 headers: { "Content-Type": "application/json", "Accept": "application/json" },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(payload),
+                signal: ctrl ? ctrl.signal : undefined
             }).then(function (res) {
                 return res.json().catch(function () { return {}; }).then(function (json) {
                     // Succès uniquement si le service confirme la prise en charge du message.
@@ -371,7 +381,7 @@
                 pForm.reset();
                 $$("[aria-invalid]", pForm).forEach(function (f) { f.setAttribute("aria-invalid", "false"); });
                 pForm.classList.add("is-sent");
-                showStatus("ok", '<i class="fas fa-check-circle" aria-hidden="true"></i> Merci pour votre intérêt pour Meet The Lead. Votre demande de partenariat a bien été transmise à notre équipe.');
+                showStatus("ok", '<i class="fas fa-check-circle" aria-hidden="true"></i> ' + esc(MSG_OK));
                 pStatus.focus();
             }).catch(function (err) {
                 if (window.console) console.error("[MTL] Envoi partenariat :", err);
@@ -379,10 +389,13 @@
                 var body = ["Nom", "Organisation", "Fonction", "E-mail", "Téléphone", "Type de partenariat", "Message"]
                     .map(function (k) { return k + " : " + payload[k]; }).join("\n");
                 var href = "mailto:" + recipient + "?subject=" + encodeURIComponent(payload._subject) + "&body=" + encodeURIComponent(body);
-                showStatus("err", "L'envoi automatique n'a pas abouti. Votre demande n'est pas perdue : envoyez-la directement par e-mail, elle est déjà rédigée." +
+                showStatus("err", esc(MSG_FAIL) +
                     '<a class="btn btn-primary btn-sm form-fallback" href="' + esc(href) + '"><i class="fas fa-envelope" aria-hidden="true"></i> Envoyer ma demande par e-mail</a>' +
-                    '<small>Adresse : ' + esc(recipient) + '</small>');
+                    '<small>Votre demande est déjà rédigée dans l’e-mail : rien n’est perdu.</small>');
+                pStatus.focus();
             }).then(function () {
+                if (timer) clearTimeout(timer);
+                sending = false;
                 pSubmit.disabled = false;
                 pSubmit.innerHTML = pLabel;
                 pForm.removeAttribute("aria-busy");

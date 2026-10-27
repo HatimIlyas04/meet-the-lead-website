@@ -60,9 +60,9 @@
             index: "02",
             name: "Africa Impact Awards",
             formTitle: "Africa Impact Awards 2026",
-            path: "africa-impact-awards/inscription/",
+            path: "africa-impact-awards/nomination/",
             formUrl: config.AFRICA_IMPACT_AWARDS_GOOGLE_FORM_URL,
-            cta: "Déposer ma candidature",
+            cta: "Nominer dès maintenant",
             date: dates.event,
             color: "var(--yellow)"
         },
