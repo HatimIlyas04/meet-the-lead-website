@@ -418,7 +418,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .ns-when span { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
 .ns-when i { color: var(--blue); font-size: 13px; }
 
-/* Galerie : 4 + 3 centrés */
+/* Galerie : 4 par ligne, dernière ligne centrée */
 .ns-grid { --gap-x: 44px; display: flex; flex-wrap: wrap; justify-content: center; gap: 64px var(--gap-x); }
 .ns-item { position: relative; display: flex; flex-direction: column; flex: 0 0 calc((100% - 3 * var(--gap-x)) / 4); min-width: 0; }
 
@@ -441,7 +441,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .ns-name { margin: 0 0 10px; padding-left: 14px; border-left: 3px solid var(--c); font-size: 18px; font-weight: 800; line-height: 1.2; letter-spacing: .02em; text-transform: uppercase; color: var(--black); text-wrap: balance; transition: color .3s; }
 .ns-role { margin: 0 0 16px; padding-left: 17px; font-size: 14px; font-weight: 400; line-height: 1.55; color: var(--muted); text-wrap: pretty; }
 .ns-role b { display: block; margin-top: 2px; font-weight: 600; color: var(--ink); }
-.ns-flag { display: block; width: 22px; height: 15px; margin: auto 0 0 17px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(22,21,28,.1); }
+.ns-flags { display: flex; gap: 6px; margin: auto 0 0 17px; }
+.ns-flag { display: block; width: 22px; height: 15px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(22,21,28,.1); }
 
 /* Interactions (souris) */
 @media (hover: hover) {
@@ -459,7 +460,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .ns-grid { --gap-x: 32px; }
     .ns-name { font-size: 16.5px; }
 }
-/* Tablette : 3 + 3 + 1 serait déséquilibré → 2 colonnes larges, dernier centré */
+/* Tablette : 2 colonnes larges */
 @media (max-width: 991px) {
     .new-speakers { padding-block: 90px 100px; }
     .ns-head { grid-template-columns: 1fr; margin-bottom: 56px; }
@@ -481,7 +482,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .ns-photo::after { bottom: 22px; border-top-width: 6px; border-bottom-width: 6px; border-left-width: 10px; }
     .ns-name { margin-bottom: 8px; padding-left: 10px; border-left-width: 2.5px; font-size: 14.5px; letter-spacing: .01em; }
     .ns-role { margin-bottom: 12px; padding-left: 12.5px; font-size: 12.75px; line-height: 1.5; }
-    .ns-flag { margin-left: 12.5px; width: 20px; height: 14px; }
+    .ns-flags { margin-left: 12.5px; gap: 5px; }
+    .ns-flag { width: 20px; height: 14px; }
     .ns-item:active .ns-frame img { transform: scale(1.03); transition-duration: .2s; }
 }
 @media (max-width: 374px) {
@@ -524,6 +526,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .partner-cell img { width: min(calc(var(--logo-w, 160px) * .78), 100%); max-height: 66px; }
     .partner-group.is-gold .partner-cell:nth-child(1) { grid-column: 1 / -1; }
     .partner-group.is-gold .partner-cell:nth-child(1) img { width: min(calc(var(--logo-w, 160px) * .9), 100%); }
+    /* Institutionnels : un logo seul en dernière ligne occupe toute la largeur */
+    .partner-group.is-institutionnels .partner-cell:last-child:nth-child(odd) { grid-column: 1 / -1; }
     .is-single .partner-logos { grid-template-columns: 1fr; }
     .is-single .partner-cell { min-height: 120px; }
     .is-single .partner-cell img { max-height: 76px; }
@@ -652,3 +656,77 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .form-status.pending { padding: 14px 16px; border-radius: 6px; font-size: 15px; background: var(--bg-soft); border: 1px solid var(--line); color: var(--ink); }
 .form-status .form-fallback { max-width: 100%; white-space: normal; text-align: center; }
 @media (max-width: 480px) { .form-status .form-fallback { display: flex; width: 100%; } }
+
+/* ---------- Hero institutionnel (Méditerranée, ports, flux) ---------- */
+.hero-context {
+    position: relative; max-width: 600px; margin: 0 0 30px; padding-left: 22px;
+    font-size: clamp(15.5px, 1.35vw, 18px); line-height: 1.75; color: rgba(255,255,255,.84);
+}
+.hero-context::before { /* filet vertical turquoise : la mer */
+    content: ""; position: absolute; left: 0; top: 5px; bottom: 5px; width: 3px; border-radius: 3px; background: var(--teal);
+}
+.hero-context strong { font-weight: 600; color: #fff; white-space: nowrap; padding-bottom: 1px; border-bottom: 2px solid var(--teal); }
+.hero-context strong.hl-yellow { border-bottom-color: var(--yellow); }
+/* Signature MTL : barrettes aux couleurs de la charte */
+.hero-stripes { display: flex; gap: 5px; margin: 0 0 18px; }
+.hero-stripes i { display: block; width: 22px; height: 4px; border-radius: 2px; background: var(--pink); }
+.hero-stripes i:nth-child(2) { background: var(--blue); }
+.hero-stripes i:nth-child(3) { background: var(--teal); }
+.hero-stripes i:nth-child(4) { background: var(--yellow); }
+.hero-stripes i:nth-child(5) { background: #8b7bd8; }
+.hero h1.hero-title { max-width: 640px; margin-bottom: 32px; font-size: clamp(28px, 3.6vw, 46px); line-height: 1.16; letter-spacing: -.015em; text-wrap: balance; }
+.hero-title .w-teal { color: var(--teal); }
+.hero-title .w-yellow { color: var(--yellow); }
+.hero-title .w-pink { color: #e9549c; } /* magenta charte, éclairci pour le contraste sur fond sombre */
+.hero .shape-ring { top: 7%; left: 44%; } /* hors du texte */
+
+/* Routes maritimes : lignes pointillées qui défilent lentement, ports qui pulsent */
+.hero-routes { position: absolute; left: 0; bottom: 0; width: 100%; height: 300px; z-index: 1; pointer-events: none; }
+.hero-routes .lane { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-dasharray: 2 10; animation: hero-lane 48s linear infinite; }
+.hero-routes .lane-a { stroke: var(--teal); stroke-opacity: .6; }
+.hero-routes .lane-b { stroke: var(--blue); stroke-opacity: .7; animation-duration: 60s; }
+.hero-routes .lane-c { stroke: var(--yellow); stroke-opacity: .45; stroke-dasharray: 1 12; animation-duration: 70s; }
+/* deux ports reliés : Tanger Med, Nador West Med */
+.hero-routes .port circle { fill: var(--teal); }
+.hero-routes .port-2 circle { fill: var(--yellow); }
+.hero-routes .port .pulse { fill: none; stroke: currentColor; stroke-width: 1.2; color: var(--teal); transform-box: fill-box; transform-origin: center; animation: hero-port 3.6s ease-out infinite; }
+.hero-routes .port-2 .pulse { color: var(--yellow); animation-delay: 1.8s; }
+@keyframes hero-lane { to { stroke-dashoffset: -600; } }
+@keyframes hero-port { from { transform: scale(1); opacity: .7; } to { transform: scale(4.5); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+    .hero-routes .lane, .hero-routes .port .pulse { animation: none; }
+}
+@media (max-width: 600px) {
+    .hero-context { padding-left: 16px; line-height: 1.68; }
+    .hero h1.hero-title { font-size: clamp(26px, 7.4vw, 32px); }
+    .hero-stripes i { width: 18px; }
+    .hero-routes { height: 190px; opacity: .8; }
+}
+
+/* ---------- V9 : photo principale « À propos » ---------- */
+.about-media picture { display: block; }
+.about-media .main { height: auto; object-position: center 30%; }
+
+/* ---------- V9 : quatre espaces (2 × 2 sur ordinateur, cartes horizontales dès 1200 px) ---------- */
+@media (min-width: 992px) {
+    .spaces { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+}
+@media (min-width: 1200px) {
+    .space-card { display: grid; grid-template-columns: 180px 1fr; }
+    .space-visual { height: auto; min-height: 100%; clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%); }
+    .space-visual .num { font-size: 84px; left: 20px; bottom: 28px; }
+    .space-visual .geo-lines { display: none; }
+    .space-visual .geo-a { right: 46px; }
+    .space-visual .geo-b { right: 84px; top: 112px; }
+    .space-visual .geo-ring { left: 30%; }
+    .space-body { padding: 30px 30px 30px 12px; }
+    .space-cta { padding: 0 20px; letter-spacing: .08em; }
+    .space-badge { left: auto; right: 22px; background: var(--bg-soft); }
+}
+
+/* Autres espaces (pages d'inscription) : 3 cartes */
+@media (min-width: 992px) {
+    .others { grid-template-columns: repeat(3, 1fr); }
+    .other-card { grid-template-columns: 56px 1fr auto; gap: 16px; padding: 22px; }
+    .other-card .num { width: 56px; height: 56px; font-size: 20px; }
+}
