@@ -418,7 +418,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .ns-when span { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; color: var(--ink); }
 .ns-when i { color: var(--blue); font-size: 13px; }
 
-/* Galerie : 4 + 3 centrés */
+/* Galerie : 4 par ligne, dernière ligne centrée */
 .ns-grid { --gap-x: 44px; display: flex; flex-wrap: wrap; justify-content: center; gap: 64px var(--gap-x); }
 .ns-item { position: relative; display: flex; flex-direction: column; flex: 0 0 calc((100% - 3 * var(--gap-x)) / 4); min-width: 0; }
 
@@ -459,7 +459,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .ns-grid { --gap-x: 32px; }
     .ns-name { font-size: 16.5px; }
 }
-/* Tablette : 3 + 3 + 1 serait déséquilibré → 2 colonnes larges, dernier centré */
+/* Tablette : 2 colonnes larges */
 @media (max-width: 991px) {
     .new-speakers { padding-block: 90px 100px; }
     .ns-head { grid-template-columns: 1fr; margin-bottom: 56px; }
@@ -652,3 +652,48 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .form-status.pending { padding: 14px 16px; border-radius: 6px; font-size: 15px; background: var(--bg-soft); border: 1px solid var(--line); color: var(--ink); }
 .form-status .form-fallback { max-width: 100%; white-space: normal; text-align: center; }
 @media (max-width: 480px) { .form-status .form-fallback { display: flex; width: 100%; } }
+
+/* ---------- V9 : Hero institutionnel (Méditerranée) ---------- */
+.hero-context {
+    position: relative; max-width: 600px; margin: 0 0 26px; padding-left: 22px;
+    font-size: clamp(15.5px, 1.35vw, 18px); line-height: 1.7; color: rgba(255,255,255,.84);
+}
+.hero-context::before { /* filet vertical : la mer (turquoise → bleu) */
+    content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 3px; border-radius: 3px;
+    background: linear-gradient(180deg, var(--teal), var(--blue));
+}
+.hero-context strong { font-weight: 600; color: #fff; box-shadow: inset 0 -.38em rgba(0,163,180,.38); }
+.hero .shape-ring { top: 7%; left: 44%; } /* hors du texte, plus long */
+.hero h1.hero-title { max-width: 640px; margin-bottom: 30px; font-size: clamp(28px, 3.6vw, 46px); line-height: 1.16; text-wrap: balance; }
+@media (max-width: 600px) {
+    .hero-context { padding-left: 16px; line-height: 1.65; }
+    .hero h1.hero-title { font-size: clamp(26px, 7.4vw, 32px); }
+}
+
+/* ---------- V9 : photo principale « À propos » ---------- */
+.about-media picture { display: block; }
+.about-media .main { height: auto; object-position: center 30%; }
+
+/* ---------- V9 : quatre espaces (2 × 2 sur ordinateur, cartes horizontales dès 1200 px) ---------- */
+@media (min-width: 992px) {
+    .spaces { grid-template-columns: repeat(2, 1fr); gap: 28px; }
+}
+@media (min-width: 1200px) {
+    .space-card { display: grid; grid-template-columns: 180px 1fr; }
+    .space-visual { height: auto; min-height: 100%; clip-path: polygon(0 0, 100% 0, 80% 100%, 0 100%); }
+    .space-visual .num { font-size: 84px; left: 20px; bottom: 28px; }
+    .space-visual .geo-lines { display: none; }
+    .space-visual .geo-a { right: 46px; }
+    .space-visual .geo-b { right: 84px; top: 112px; }
+    .space-visual .geo-ring { left: 30%; }
+    .space-body { padding: 30px 30px 30px 12px; }
+    .space-cta { padding: 0 20px; letter-spacing: .08em; }
+    .space-badge { left: auto; right: 22px; background: var(--bg-soft); }
+}
+
+/* Autres espaces (pages d'inscription) : 3 cartes */
+@media (min-width: 992px) {
+    .others { grid-template-columns: repeat(3, 1fr); }
+    .other-card { grid-template-columns: 56px 1fr auto; gap: 16px; padding: 22px; }
+    .other-card .num { width: 56px; height: 56px; font-size: 20px; }
+}

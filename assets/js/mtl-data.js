@@ -137,14 +137,13 @@
     // Plusieurs fonctions : titles: [{ role, organization }, ...] (une ligne chacune).
     // Ne publier que des intervenants confirmés (confirmed: true).
     var speakers2026 = [
-        { id: "ryad-mezzour", name: "Ryad Mezzour",
-          role: "Ministre de l'Industrie, du Commerce, de l'Investissement et de l'Inclusion économique", organization: "",
-          country: "ma", color: "var(--pink)", displayOrder: 1 },
         { id: "mohamed-bachiri", name: "Mohamed Bachiri",
           titles: [{ role: "Directeur Général", organization: "Renault Group Maroc" }, { role: "Vice-Président Général", organization: "CGEM" }],
-          country: "ma", color: "var(--blue)", displayOrder: 2 },
+          country: "ma", color: "var(--blue)", displayOrder: 1 },
         { id: "anouar-alaoui-ismaili", name: "Anouar Alaoui Ismaili", role: "Directeur Général", organization: "Maroc PME",
-          country: "ma", color: "var(--teal)", displayOrder: 3 },
+          country: "ma", color: "var(--teal)", displayOrder: 2 },
+        { id: "mohamed-amin-fatmi", name: "Mohamed Amin Fatmi", role: "Président", organization: "CGEM Oriental",
+          country: "ma", color: "var(--pink)", displayOrder: 3 },
         { id: "unielle-oupolo", name: "Unielle Oupolo", role: "Épouse de Son Excellence l'Ambassadeur du Gabon", organization: "Présidente du Cercle Diplomatique",
           country: "ga", color: "var(--purple)", displayOrder: 4 },
         { id: "tawfiq-gouach", name: "Tawfiq Gouach", role: "Fondateur & CEO", organization: "SOJORI",
@@ -152,7 +151,9 @@
         { id: "zineb-hatim", name: "Zineb Hatim", role: "Présidente", organization: "Maroc Entrepreneurs",
           country: "ma", color: "var(--pink)", displayOrder: 6 },
         { id: "rachid-ressani", name: "Rachid Ressani", role: "Président", organization: "APEBI",
-          country: "ma", color: "var(--blue)", displayOrder: 7 }
+          country: "ma", color: "var(--blue)", displayOrder: 7 },
+        { id: "abdelilah-hammada", name: "Abdelilah Hammada", role: "Fondateur & CEO", organization: "ALGUNO",
+          country: "ma", color: "var(--teal)", displayOrder: 8 }
     ];
     speakers2026.forEach(function (s) {
         s.image = "assets/img/speakers-2026/" + s.id + ".jpg";
@@ -166,7 +167,7 @@
     };
 
     // À incrémenter quand une photo est remplacée sous le même nom (force le rechargement)
-    var assetsVersion = "7";
+    var assetsVersion = "8";
 
     window.MTL = {
         assetsVersion: assetsVersion,
