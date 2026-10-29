@@ -102,6 +102,10 @@
           category: "institutionnels", order: 2,
           logo: "assets/img/partners/wilaya-oriental.png", width: 203, height: 240, optical: 1.05,
           alt: "Wilaya de la Région de l'Oriental" },
+        { id: "cgem-oriental", name: "CGEM Oriental", short: "CGEM Oriental",
+          category: "institutionnels", order: 3,
+          logo: "assets/img/partners/cgem-oriental.png", width: 606, height: 245, optical: 1.3,
+          alt: "CGEM Oriental — Confédération Générale des Entreprises du Maroc, Région de l'Oriental" },
 
         { id: "belgique-cooperation", name: "Belgique — partenaire du développement", short: "Belgique",
           category: "gold", order: 1,
@@ -133,7 +137,8 @@
     ];
 
     // Speakers confirmés de la 8ème édition (2026), dans l'ordre du visuel officiel « Speakers 2026 ».
-    // Affichage : photo, nom, fonction (role + organisation), drapeau. Rien d'autre.
+    // Affichage : photo, nom, fonction (role + organisation), drapeau(x). Rien d'autre.
+    // Plusieurs nationalités : country: ["ma", "fr"].
     // Plusieurs fonctions : titles: [{ role, organization }, ...] (une ligne chacune).
     // Ne publier que des intervenants confirmés (confirmed: true).
     var speakers2026 = [
@@ -149,7 +154,7 @@
         { id: "tawfiq-gouach", name: "Tawfiq Gouach", role: "Fondateur & CEO", organization: "SOJORI",
           country: "ma", color: "var(--yellow)", displayOrder: 5 },
         { id: "zineb-hatim", name: "Zineb Hatim", role: "Présidente", organization: "Maroc Entrepreneurs",
-          country: "ma", color: "var(--pink)", displayOrder: 6 },
+          country: ["ma", "fr"], color: "var(--pink)", displayOrder: 6 },
         { id: "rachid-ressani", name: "Rachid Ressani", role: "Président", organization: "APEBI",
           country: "ma", color: "var(--blue)", displayOrder: 7 },
         { id: "abdelilah-hammada", name: "Abdelilah Hammada", role: "Fondateur & CEO", organization: "ALGUNO",
@@ -163,7 +168,8 @@
 
     var countries = {
         ma: { name: "Maroc", flag: "assets/img/flags/ma.svg" },
-        ga: { name: "Gabon", flag: "assets/img/flags/ga.svg" }
+        ga: { name: "Gabon", flag: "assets/img/flags/ga.svg" },
+        fr: { name: "France", flag: "assets/img/flags/fr.svg" }
     };
 
     // À incrémenter quand une photo est remplacée sous le même nom (force le rechargement)

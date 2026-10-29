@@ -249,7 +249,7 @@
         }
         var countries = MTL.countries || {};
         box.innerHTML = list.map(function (s, i) {
-            var c = countries[s.country];
+            var flags = [].concat(s.country || []).map(function (k) { return countries[k]; }).filter(Boolean);
             var img = ROOT + s.image;
             var titles = s.titles || [{ role: s.role, organization: s.organization }];
             var plain = titles.map(function (t) { return t.role + (t.organization ? ", " + t.organization : ""); }).join(" ; ");
@@ -261,7 +261,7 @@
                 '</picture></span></figure>' +
                 '<h3 class="ns-name">' + esc(s.name) + '</h3>' +
                 '<p class="ns-role">' + titles.map(function (t) { return '<span>' + esc(t.role) + (t.organization ? '<b>' + esc(t.organization) + '</b>' : '') + '</span>'; }).join("") + '</p>' +
-                (c ? '<img class="ns-flag" src="' + esc(ROOT + c.flag) + '" alt="' + esc(c.name) + '" title="' + esc(c.name) + '" width="24" height="16">' : '') +
+                (flags.length ? '<span class="ns-flags">' + flags.map(function (c) { return '<img class="ns-flag" src="' + esc(ROOT + c.flag) + '" alt="' + esc(c.name) + '" title="' + esc(c.name) + '" width="24" height="16">'; }).join("") + '</span>' : '') +
                 '</li>';
         }).join("");
     });
