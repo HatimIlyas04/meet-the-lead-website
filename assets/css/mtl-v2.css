@@ -154,12 +154,15 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .partners-section .bg-diag { position: absolute; top: 70px; left: -40px; width: 120px; height: 160px; background: repeating-linear-gradient(118deg, var(--teal) 0 3px, transparent 3px 16px); opacity: .25; pointer-events: none; }
 .partners-section .bg-tri { position: absolute; right: 6%; top: 100px; width: 0; height: 0; border-top: 16px solid transparent; border-bottom: 16px solid transparent; border-left: 28px solid var(--yellow); pointer-events: none; animation: float 7s ease-in-out infinite; }
 .partners-section .bg-ring { position: absolute; left: 8%; bottom: 60px; width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--pink); opacity: .5; pointer-events: none; }
-.partner-wall { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); border-top: 2px solid var(--ink); position: relative; }
-.partner-group { grid-column: span 5; padding: 26px 30px 30px; border-bottom: 1px solid var(--line); min-width: 0; }
-.partner-group.is-institutionnels { grid-column: span 4; border-right: 1px solid var(--line); padding-left: 0; }
-.partner-group.is-gold { grid-column: span 6; padding-right: 0; }
-.partner-group.is-hackathon { border-right: 1px solid var(--line); padding-left: 0; }
-.partner-group.is-sponsor { padding-right: 0; }
+/* Grille 12 colonnes : 1 | 3 groupes | 3 groupes (3+3+6) | 1 — puis l'organisateur */
+.partner-wall { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); border-top: 2px solid var(--ink); position: relative; }
+.partner-group { grid-column: span 4; padding: 26px 26px 30px; border-bottom: 1px solid var(--line); border-right: 1px solid var(--line); min-width: 0; }
+.partner-group.is-institutionnels, .partner-group.is-media { grid-column: 1 / -1; padding-inline: 0; border-right: 0; }
+.partner-group.is-hackathon, .partner-group.is-inclusion { padding-left: 0; }
+.partner-group.is-jobday, .partner-group.is-ecosysteme { padding-right: 0; border-right: 0; }
+.partner-group.is-inclusion, .partner-group.is-technologique { grid-column: span 3; }
+.partner-group.is-ecosysteme { grid-column: span 6; }
+.partner-group.is-inclusion .pg-num { color: var(--ink); }
 .partner-group-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
 .pg-num { display: grid; place-items: center; flex-shrink: 0; width: 30px; height: 30px; font-size: 12px; font-weight: 800; color: #fff; background: var(--c); clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%); }
 .partner-group.is-gold .pg-num { color: var(--ink); }
@@ -183,13 +186,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 .partners-note strong { color: var(--ink); }
 
 @media (max-width: 991px) {
-    .partner-group, .partner-group.is-institutionnels, .partner-group.is-gold { grid-column: 1 / -1; padding-inline: 0; border-right: 0; }
-    .partner-group.is-hackathon, .partner-group.is-sponsor { grid-column: span 5; }
-    .partner-group.is-hackathon { padding-right: 20px; border-right: 1px solid var(--line); }
-    .partner-group.is-sponsor { padding-left: 20px; }
+    /* Tablette : deux groupes par ligne (colonne gauche à filet) */
+    .partner-group, .partner-group.is-inclusion, .partner-group.is-technologique, .partner-group.is-ecosysteme { grid-column: span 6; }
+    .partner-group.is-hackathon, .partner-group.is-jobday, .partner-group.is-technologique { padding: 26px 20px 30px 0; border-right: 1px solid var(--line); }
+    .partner-group.is-sponsor, .partner-group.is-inclusion, .partner-group.is-ecosysteme { padding: 26px 0 30px 20px; border-right: 0; }
 }
 @media (max-width: 600px) {
-    .partner-group.is-hackathon, .partner-group.is-sponsor { grid-column: 1 / -1; padding-inline: 0; border-right: 0; }
+    .partner-group, .partner-group.is-hackathon, .partner-group.is-jobday, .partner-group.is-technologique,
+    .partner-group.is-sponsor, .partner-group.is-inclusion, .partner-group.is-ecosysteme { grid-column: 1 / -1; padding-inline: 0; border-right: 0; }
     .partner-group.is-gold .partner-logos { flex-wrap: wrap; }
     .partner-group.is-gold .partner-cell { flex: 1 1 50% !important; }
     .partner-group.is-gold .partner-cell:nth-child(1) { flex-basis: 100% !important; }
@@ -433,9 +437,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 15px solid var(--c);
     transition: transform .6s cubic-bezier(.2,.7,.2,1);
 }
-.ns-frame { position: relative; z-index: 1; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 999px 999px 4px 4px; background: var(--bg-soft); }
+.ns-frame { position: relative; z-index: 1; display: block; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 999px 999px 4px 4px; background: var(--bg-soft); }
 .ns-frame picture, .ns-frame img { display: block; width: 100%; height: 100%; }
-.ns-frame img { object-fit: cover; object-position: center 22%; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+.ns-frame img { object-fit: cover; object-position: center; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
 
 /* Texte */
 .ns-name { margin: 0 0 10px; padding-left: 14px; border-left: 3px solid var(--c); font-size: 18px; font-weight: 800; line-height: 1.2; letter-spacing: .02em; text-transform: uppercase; color: var(--black); text-wrap: balance; transition: color .3s; }
