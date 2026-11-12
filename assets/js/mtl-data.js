@@ -196,25 +196,32 @@
           country: "ma" },
         { id: "unielle-oupolo", name: "Unielle OUPOLO", role: "Présidente du Cercle Diplomatique",
           country: "ga" },
-        { id: "hicham-saadli", name: "Hicham SAADLI", role: "Président", organization: "Fédération du Commerce et Services" },
+        { id: "hicham-saadli", name: "Hicham SAADLI", role: "Président", organization: "Fédération du Commerce et Services",
+          country: "ma" },
         { id: "yassine-karim", name: "Yassine KARIM",
-          titles: [{ role: "DG", organization: "Tennaxia Consulting" }, { role: "Vice-Président Général", organization: "FCS" }] },
+          titles: [{ role: "DG", organization: "Tennaxia Consulting" }, { role: "Vice-Président Général", organization: "FCS" }],
+          country: "ma" },
         { id: "tawfiq-gouach", name: "Tawfiq GOUACH", role: "Fondateur & CEO", organization: "SOJORI",
           country: "ma" },
-        { id: "rachid-rami", name: "Rachid RAMI", role: "Directeur Général", organization: "CRI de l'Oriental" },
+        { id: "rachid-rami", name: "Rachid RAMI", role: "Directeur Général", organization: "CRI de l'Oriental",
+          country: "ma" },
         { id: "zineb-hatim", name: "Zineb HATIM", role: "Présidente", organization: "Maroc Entrepreneurs",
           country: ["ma", "fr"] },
         { id: "abdelilah-hammada", name: "Abdelilah HAMMADA", role: "Fondateur & CEO", organization: "ALGUNO",
           country: "ma" },
-        { id: "mohammed-louziri", name: "Mohammed LOUZIRI", role: "Président", organization: "Association des Très Petites Entreprises" },
-        { id: "lahcin-ait-aissa", name: "Lahcin AIT AISSA", role: "Senior Applications Engineer", organization: "Renesas Electronics Europe" },
+        { id: "mohammed-louziri", name: "Mohammed LOUZIRI", role: "Président", organization: "Association des Très Petites Entreprises",
+          country: "ma" },
+        { id: "lahcin-ait-aissa", name: "Lahcin AIT AISSA", role: "Senior Applications Engineer", organization: "Renesas Electronics Europe",
+          country: ["ma", "gb"] },
         { id: "fatima-dagdag", name: "Fatima DAGDAG",
-          titles: [{ role: "Global IT Program Director" }, { role: "Global Change Management Expert" }] }
+          titles: [{ role: "Global IT Program Director" }, { role: "Global Change Management Expert" }],
+          country: ["ma", "fr"] }
     ];
     var speakerColors = ["var(--blue)", "var(--teal)", "var(--pink)", "var(--purple)", "var(--yellow)"];
     speakers2026.forEach(function (s, i) {
-        s.image = "assets/img/speakers/" + s.id + ".jpg";
-        s.width = 600; s.height = 600; // photos carrées
+        // Portraits 4:5 (cadre en arche du site) — assets/img/speakers-2026/<id>.jpg + .webp
+        s.image = "assets/img/speakers-2026/" + s.id + ".jpg";
+        s.width = 560; s.height = 700;
         s.color = speakerColors[i % speakerColors.length];
         s.displayOrder = i + 1;
         s.edition = 2026; s.confirmed = true;
@@ -223,11 +230,13 @@
     var countries = {
         ma: { name: "Maroc", flag: "assets/img/flags/ma.svg" },
         ga: { name: "Gabon", flag: "assets/img/flags/ga.svg" },
-        fr: { name: "France", flag: "assets/img/flags/fr.svg" }
+        fr: { name: "France", flag: "assets/img/flags/fr.svg" },
+        gb: { name: "Royaume-Uni", flag: "assets/img/flags/gb.svg" }
     };
 
     // À incrémenter quand une photo est remplacée sous le même nom (force le rechargement)
-    var assetsVersion = "9";
+    // + penser au ?v= des balises CSS/JS dans les pages HTML.
+    var assetsVersion = "10";
 
     window.MTL = {
         assetsVersion: assetsVersion,

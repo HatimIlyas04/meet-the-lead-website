@@ -437,9 +437,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     border-top: 9px solid transparent; border-bottom: 9px solid transparent; border-left: 15px solid var(--c);
     transition: transform .6s cubic-bezier(.2,.7,.2,1);
 }
-.ns-frame { position: relative; z-index: 1; display: block; aspect-ratio: 1 / 1; overflow: hidden; border-radius: 999px 999px 4px 4px; background: var(--bg-soft); }
+.ns-frame { position: relative; z-index: 1; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 999px 999px 4px 4px; background: var(--bg-soft); }
 .ns-frame picture, .ns-frame img { display: block; width: 100%; height: 100%; }
-.ns-frame img { object-fit: cover; object-position: center; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+.ns-frame img { object-fit: cover; object-position: center 22%; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
 
 /* Texte */
 .ns-name { margin: 0 0 10px; padding-left: 14px; border-left: 3px solid var(--c); font-size: 18px; font-weight: 800; line-height: 1.2; letter-spacing: .02em; text-transform: uppercase; color: var(--black); text-wrap: balance; transition: color .3s; }
