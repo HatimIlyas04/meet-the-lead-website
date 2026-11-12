@@ -247,7 +247,7 @@
             box.outerHTML = '<p class="ns-soon">New Speakers 2026 — <span>Coming soon</span></p>';
             return;
         }
-        // Style 2026 (v2) : carte portrait plein cadre, numéro, nom + fonction sur dégradé. Pas de drapeaux.
+        // Style 2026 (v3) : carte blanche, photo encadrée, nom + fonction SOUS la photo. Ni numéro ni drapeau.
         box.classList.add("sp26-grid");
         box.innerHTML = list.map(function (s, i) {
             var img = ROOT + s.image;
@@ -259,17 +259,16 @@
             var k = words.findIndex(function (w) { return w.length > 1 && w === w.toUpperCase(); });
             if (k < 1) k = words.length - 1;
             var first = words.slice(0, k).join(" "), last = words.slice(k).join(" ");
-            var num = (i + 1 < 10 ? "0" : "") + (i + 1);
             return '<li class="sp26-item reveal" style="--c:' + s.color + ';--i:' + i + '">' +
                 '<article class="sp26-card">' +
-                '<span class="sp26-num" aria-hidden="true">' + num + '</span>' +
-                '<picture class="sp26-photo">' +
+                '<div class="sp26-pic"><picture class="sp26-photo">' +
                 '<source type="image/webp" srcset="' + esc(img.replace(/\.jpg$/, ".webp") + v) + '">' +
                 '<img src="' + esc(img + v) + '" alt="' + esc(s.name + ", " + plain) + '" width="' + s.width + '" height="' + s.height + '" loading="lazy" decoding="async">' +
-                '</picture>' +
+                '</picture></div>' +
                 '<div class="sp26-txt">' +
                 '<h3 class="sp26-name"><span>' + esc(first) + '</span>' + esc(last) + '</h3>' +
-                '<p class="sp26-role">' + titles.map(function (t) { return '<span>' + esc(t.role) + (t.organization ? ' <b>' + esc(t.organization) + '</b>' : '') + '</span>'; }).join("") + '</p>' +
+                '<i class="sp26-bar" aria-hidden="true"></i>' +
+                '<p class="sp26-role">' + titles.map(function (t) { return '<span>' + esc(t.role) + (t.organization ? '<b>' + esc(t.organization) + '</b>' : '') + '</span>'; }).join("") + '</p>' +
                 '</div></article></li>';
         }).join("");
     });

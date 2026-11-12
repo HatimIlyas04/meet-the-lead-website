@@ -240,7 +240,7 @@
 
     // À incrémenter quand une photo est remplacée sous le même nom (force le rechargement)
     // + penser au ?v= des balises CSS/JS dans les pages HTML.
-    var assetsVersion = "11";
+    var assetsVersion = "12";
 
     window.MTL = {
         assetsVersion: assetsVersion,
