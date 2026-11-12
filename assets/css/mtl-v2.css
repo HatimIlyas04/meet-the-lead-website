@@ -734,3 +734,84 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .other-card { grid-template-columns: 56px 1fr auto; gap: 16px; padding: 22px; }
     .other-card .num { width: 56px; height: 56px; font-size: 20px; }
 }
+
+/* =====================================================================
+   v11 — En-tête : lockup « 8ème édition | Meet The Lead » (8ème en premier)
+   ===================================================================== */
+.brand.brand-lockup { display: flex; align-items: center; gap: 14px; width: auto; height: auto; overflow: visible; }
+.brand.brand-lockup img { margin: 0; max-width: none; }
+.brand.brand-lockup .brand-8 { height: 46px; width: auto; }
+.brand.brand-lockup .brand-mtl { height: 52px; width: auto; }
+.brand-sep { display: block; width: 1.5px; height: 38px; background: #D3D6E2; flex-shrink: 0; }
+.footer-logo .brand.brand-lockup { gap: 12px; }
+.footer-logo .brand.brand-lockup .brand-8 { height: 60px; }
+.footer-logo .brand.brand-lockup .brand-mtl { height: 60px; }
+.brand-8-txt { margin-left: -6px; font-size: 13px; font-weight: 700; line-height: 1.1; color: #fff; }
+.is-light .brand-sep { background: rgba(255,255,255,.28); }
+@media (max-width: 600px) {
+    .brand.brand-lockup { gap: 10px; }
+    .brand.brand-lockup .brand-8 { height: 36px; }
+    .brand.brand-lockup .brand-mtl { height: 42px; }
+    .brand-sep { height: 30px; }
+}
+
+/* =====================================================================
+   v11 — Speakers 2026 : nouveau style (cartes portrait plein cadre)
+   ===================================================================== */
+.new-speakers { background: linear-gradient(180deg, #F4F2FB 0%, #FFFFFF 46%); }
+.new-speakers::before { display: none; }
+.ns-eight-bg { position: absolute; right: -40px; top: -30px; width: auto; height: 520px; opacity: .07; pointer-events: none; user-select: none; }
+.ns-head-main { display: flex; align-items: center; gap: 22px; }
+.ns-eight { flex-shrink: 0; width: auto; height: 128px; filter: drop-shadow(0 10px 18px rgba(60,40,140,.16)); }
+.ns-sub { margin: 12px 0 0; font-size: 15px; font-weight: 500; color: var(--muted); }
+
+.ns-grid.sp26-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px; max-width: none; }
+.sp26-item { min-width: 0; list-style: none; }
+.sp26-item.reveal { transition-delay: calc(var(--i, 0) * 55ms); }
+.sp26-card { position: relative; display: block; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 22px; background: #1E1841; isolation: isolate;
+    box-shadow: 0 14px 34px rgba(30,24,65,.14), 0 0 0 1px rgba(30,24,65,.05); transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s; }
+.sp26-photo, .sp26-photo img { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+.sp26-photo img { object-fit: cover; object-position: center 20%; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
+.sp26-card::after { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(22,16,58,0) 34%, rgba(22,16,58,.55) 60%, rgba(22,16,58,.94) 100%); }
+.sp26-card::before { content: ""; position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; height: 5px; background: var(--c); }
+.sp26-num { position: absolute; z-index: 2; top: 14px; left: 14px; display: grid; place-items: center; width: 34px; height: 34px;
+    font-size: 12px; font-weight: 800; letter-spacing: .02em; color: #fff; background: var(--c);
+    clip-path: polygon(0 0, 100% 0, 100% 70%, 70% 100%, 0 100%); }
+.sp26-txt { position: absolute; z-index: 2; left: 0; right: 0; bottom: 0; padding: 16px 16px 20px; color: #fff; }
+.sp26-name { margin: 0 0 8px; font-size: 17px; font-weight: 800; line-height: 1.12; letter-spacing: .015em; text-transform: uppercase; color: #fff; text-wrap: balance; }
+.sp26-name span { display: block; margin-bottom: 2px; font-size: 13px; font-weight: 500; letter-spacing: .02em; text-transform: none; color: rgba(255,255,255,.86); }
+.sp26-role { margin: 0; padding-left: 10px; border-left: 2px solid var(--c); font-size: 12.5px; line-height: 1.42; color: rgba(255,255,255,.8); text-wrap: pretty; }
+.sp26-role span { display: block; }
+.sp26-role b { font-weight: 700; color: #fff; }
+@media (hover: hover) {
+    .sp26-item:hover .sp26-card { transform: translateY(-6px); box-shadow: 0 22px 44px rgba(30,24,65,.22), 0 0 0 1px rgba(30,24,65,.05); }
+    .sp26-item:hover .sp26-photo img { transform: scale(1.05); }
+}
+@media (max-width: 1199px) { .ns-grid.sp26-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media (max-width: 991px) {
+    .ns-grid.sp26-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .ns-eight { height: 104px; }
+}
+@media (max-width: 680px) {
+    .ns-grid.sp26-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .ns-head-main { gap: 14px; }
+    .ns-eight { height: 82px; }
+    .ns-eight-bg { height: 300px; right: -60px; }
+    .sp26-card { border-radius: 16px; }
+    .sp26-num { top: 10px; left: 10px; width: 28px; height: 28px; font-size: 10.5px; }
+    .sp26-txt { padding: 12px 11px 14px; }
+    .sp26-name { font-size: 13.5px; margin-bottom: 6px; }
+    .sp26-name span { font-size: 11px; }
+    .sp26-role { padding-left: 7px; font-size: 10.8px; line-height: 1.36; }
+}
+
+/* v11 — en-tête compact entre 992 et 1279 px : le menu reste sur une ligne */
+.main-nav a { white-space: nowrap; }
+@media (min-width: 992px) and (max-width: 1279px) {
+    .site-header .brand.brand-lockup { gap: 9px; }
+    .site-header .brand.brand-lockup .brand-8 { height: 34px; }
+    .site-header .brand.brand-lockup .brand-mtl { height: 40px; }
+    .site-header .brand-sep { height: 28px; }
+    .main-nav a { padding: 9px 7px; font-size: 13.5px; }
+}
