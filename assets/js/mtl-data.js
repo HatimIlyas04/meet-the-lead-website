@@ -89,7 +89,7 @@
         { id: "inclusion", label: "Partenaire Inclusion & Employabilité", color: "var(--yellow)" },
         { id: "technologique", label: "Partenaire Technologique", color: "var(--purple)" },
         { id: "ecosysteme", label: "Partenaires Écosystème", color: "var(--teal)" },
-        { id: "media", label: "Partenaire Média", color: "var(--pink)" },
+        { id: "media", label: "Partenaires Média", color: "var(--pink)" },
         // Pas une catégorie de sponsoring : affichée à part, en fin de section.
         { id: "organisateur", label: "Organisateur", color: "var(--purple)", organizer: true }
     ];
@@ -170,6 +170,10 @@
           category: "media", order: 1,
           logo: P + "aujourdhui-le-maroc.png", width: 600, height: 132, optical: 1,
           alt: "Aujourd'hui Le Maroc" },
+        { id: "medias24", name: "Médias24", short: "Médias24",
+          category: "media", order: 2,
+          logo: P + "medias24.png", width: 600, height: 155, optical: 1,
+          alt: "Médias24 — l'information économique marocaine en continu" },
 
         { id: "startupgrow-foundation", name: "StartupGrow Foundation", short: "StartupGrow Foundation",
           category: "organisateur", order: 1,
@@ -236,7 +240,7 @@
 
     // À incrémenter quand une photo est remplacée sous le même nom (force le rechargement)
     // + penser au ?v= des balises CSS/JS dans les pages HTML.
-    var assetsVersion = "10";
+    var assetsVersion = "15";
 
     window.MTL = {
         assetsVersion: assetsVersion,

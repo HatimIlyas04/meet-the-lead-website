@@ -247,22 +247,21 @@
             box.outerHTML = '<p class="ns-soon">New Speakers 2026 — <span>Coming soon</span></p>';
             return;
         }
-        var countries = MTL.countries || {};
-        box.innerHTML = list.map(function (s, i) {
-            var flags = [].concat(s.country || []).map(function (k) { return countries[k]; }).filter(Boolean);
+        // Style 2026 = même style que les Past Speakers (article.speaker : arche, étiquette, nom, fonction).
+        // Ni numéro ni drapeau. Le logo 8ème édition est en filigrane dans le fond de la section.
+        box.innerHTML = list.map(function (s) {
             var img = ROOT + s.image;
             var titles = s.titles || [{ role: s.role, organization: s.organization }];
             var plain = titles.map(function (t) { return t.role + (t.organization ? ", " + t.organization : ""); }).join(" ; ");
             var v = "?v=" + (MTL.assetsVersion || "1");
-            return '<li class="ns-item reveal" style="--c:' + s.color + ';--i:' + i + '">' +
-                '<figure class="ns-photo"><span class="ns-frame"><picture>' +
+            return '<article class="speaker reveal">' +
+                '<div class="photo"><picture>' +
                 '<source type="image/webp" srcset="' + esc(img.replace(/\.jpg$/, ".webp") + v) + '">' +
                 '<img src="' + esc(img + v) + '" alt="' + esc(s.name + ", " + plain) + '" width="' + s.width + '" height="' + s.height + '" loading="lazy" decoding="async">' +
-                '</picture></span></figure>' +
-                '<h3 class="ns-name">' + esc(s.name) + '</h3>' +
-                '<p class="ns-role">' + titles.map(function (t) { return '<span>' + esc(t.role) + (t.organization ? '<b>' + esc(t.organization) + '</b>' : '') + '</span>'; }).join("") + '</p>' +
-                (flags.length ? '<span class="ns-flags">' + flags.map(function (c) { return '<img class="ns-flag" src="' + esc(ROOT + c.flag) + '" alt="' + esc(c.name) + '" title="' + esc(c.name) + '" width="24" height="16">'; }).join("") + '</span>' : '') +
-                '</li>';
+                '</picture></div>' +
+                '<h3>' + esc(s.name) + '</h3>' +
+                '<p>' + titles.map(function (t) { return esc(t.role) + (t.organization ? ", " + esc(t.organization) : ""); }).join("<br>") + '</p>' +
+                '</article>';
         }).join("");
     });
     // Vitrine d'une seule catégorie (ex. partenaire Hackathon sur la page d'inscription)

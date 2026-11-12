@@ -734,3 +734,58 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .other-card { grid-template-columns: 56px 1fr auto; gap: 16px; padding: 22px; }
     .other-card .num { width: 56px; height: 56px; font-size: 20px; }
 }
+
+/* =====================================================================
+   v11 — En-tête : lockup « 8ème édition | Meet The Lead » (8ème en premier)
+   ===================================================================== */
+.brand.brand-lockup { display: flex; align-items: center; gap: 14px; width: auto; height: auto; overflow: visible; }
+.brand.brand-lockup img { margin: 0; max-width: none; }
+.brand.brand-lockup .brand-8 { height: 46px; width: auto; }
+.brand.brand-lockup .brand-mtl { height: 52px; width: auto; }
+.brand-sep { display: block; width: 1.5px; height: 38px; background: #D3D6E2; flex-shrink: 0; }
+.footer-logo .brand.brand-lockup { gap: 12px; }
+.footer-logo .brand.brand-lockup .brand-8 { height: 60px; }
+.footer-logo .brand.brand-lockup .brand-mtl { height: 60px; }
+.brand-8-txt { margin-left: -6px; font-size: 13px; font-weight: 700; line-height: 1.1; color: #fff; }
+.is-light .brand-sep { background: rgba(255,255,255,.28); }
+@media (max-width: 600px) {
+    .brand.brand-lockup { gap: 10px; }
+    .brand.brand-lockup .brand-8 { height: 36px; }
+    .brand.brand-lockup .brand-mtl { height: 42px; }
+    .brand-sep { height: 30px; }
+}
+
+/* Speakers 2026 : style des Past Speakers sur fond BLANC + illustrations de la charte + logo 8ème en filigrane */
+.speakers-2026 { position: relative; overflow: hidden; background: #fff; }
+.speakers-2026 .container { position: relative; z-index: 1; }
+.speakers-2026 .eyebrow { color: var(--pink); }
+.s26-wm { position: absolute; z-index: 0; left: 50%; top: 22px; width: auto; height: 340px; transform: translateX(-50%); opacity: .14; pointer-events: none; user-select: none; }
+.speaker .photo picture { display: block; width: 100%; height: 100%; }
+.s26-facets { position: absolute; z-index: 0; pointer-events: none; }
+.s26-facets-tl { left: -10px; top: 0; width: 150px; opacity: .9; }
+.s26-facets-br { right: -8px; bottom: 0; width: 170px; opacity: .9; }
+.s26-dots { position: absolute; z-index: 0; right: 6%; top: 70px; width: 130px; height: 84px; background-image: radial-gradient(rgba(60,131,187,.55) 1.6px, transparent 2px); background-size: 16px 16px; pointer-events: none; }
+.s26-lines { position: absolute; z-index: 0; left: -30px; top: 46%; width: 90px; height: 120px; pointer-events: none; }
+.s26-lines i { position: absolute; bottom: 0; width: 6px; height: 100%; border-radius: 6px; transform: rotate(28deg); transform-origin: bottom; }
+.s26-lines i:nth-child(1) { left: 6px; height: 70%; background: var(--teal); }
+.s26-lines i:nth-child(2) { left: 28px; background: var(--blue); }
+.s26-lines i:nth-child(3) { left: 50px; height: 85%; background: var(--yellow); }
+.s26-lines i:nth-child(4) { left: 72px; height: 60%; background: var(--pink); }
+.s26-ring { position: absolute; z-index: 0; left: 9%; top: 150px; width: 40px; height: 40px; border-radius: 50%; border: 3px solid var(--pink); opacity: .6; pointer-events: none; animation: float 7s ease-in-out infinite; }
+.s26-tri { position: absolute; z-index: 0; right: 4%; top: 42%; width: 0; height: 0; border-top: 16px solid transparent; border-bottom: 16px solid transparent; border-left: 28px solid var(--yellow); pointer-events: none; animation: float 8s ease-in-out infinite; }
+@media (max-width: 991px) { .s26-lines, .s26-tri { display: none; } .s26-dots { top: 40px; right: 16px; width: 80px; height: 52px; } }
+@media (max-width: 680px) {
+    .s26-wm { top: 26px; height: 240px; opacity: .13; }
+    .s26-facets-tl { width: 90px; } .s26-facets-br { width: 100px; }
+    .s26-ring { display: none; }
+}
+
+/* v11 — en-tête compact entre 992 et 1279 px : le menu reste sur une ligne */
+.main-nav a { white-space: nowrap; }
+@media (min-width: 992px) and (max-width: 1279px) {
+    .site-header .brand.brand-lockup { gap: 9px; }
+    .site-header .brand.brand-lockup .brand-8 { height: 34px; }
+    .site-header .brand.brand-lockup .brand-mtl { height: 40px; }
+    .site-header .brand-sep { height: 28px; }
+    .main-nav a { padding: 9px 7px; font-size: 13.5px; }
+}
