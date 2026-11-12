@@ -258,7 +258,7 @@
                 '<div class="photo"><picture>' +
                 '<source type="image/webp" srcset="' + esc(img.replace(/\.jpg$/, ".webp") + v) + '">' +
                 '<img src="' + esc(img + v) + '" alt="' + esc(s.name + ", " + plain) + '" width="' + s.width + '" height="' + s.height + '" loading="lazy" decoding="async">' +
-                '</picture><span class="edition-tag">Speaker 2026</span></div>' +
+                '</picture></div>' +
                 '<h3>' + esc(s.name) + '</h3>' +
                 '<p>' + titles.map(function (t) { return esc(t.role) + (t.organization ? ", " + esc(t.organization) : ""); }).join("<br>") + '</p>' +
                 '</article>';
