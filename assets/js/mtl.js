@@ -247,29 +247,21 @@
             box.outerHTML = '<p class="ns-soon">New Speakers 2026 — <span>Coming soon</span></p>';
             return;
         }
-        // Style 2026 (v3) : carte blanche, photo encadrée, nom + fonction SOUS la photo. Ni numéro ni drapeau.
-        box.classList.add("sp26-grid");
-        box.innerHTML = list.map(function (s, i) {
+        // Style 2026 = même style que les Past Speakers (article.speaker : arche, étiquette, nom, fonction).
+        // Ni numéro ni drapeau. Le logo 8ème édition est en filigrane dans le fond de la section.
+        box.innerHTML = list.map(function (s) {
             var img = ROOT + s.image;
             var titles = s.titles || [{ role: s.role, organization: s.organization }];
             var plain = titles.map(function (t) { return t.role + (t.organization ? ", " + t.organization : ""); }).join(" ; ");
             var v = "?v=" + (MTL.assetsVersion || "1");
-            // Prénom(s) en clair, NOM (mots en capitales) en gras
-            var words = s.name.split(" ");
-            var k = words.findIndex(function (w) { return w.length > 1 && w === w.toUpperCase(); });
-            if (k < 1) k = words.length - 1;
-            var first = words.slice(0, k).join(" "), last = words.slice(k).join(" ");
-            return '<li class="sp26-item reveal" style="--c:' + s.color + ';--i:' + i + '">' +
-                '<article class="sp26-card">' +
-                '<div class="sp26-pic"><picture class="sp26-photo">' +
+            return '<article class="speaker reveal">' +
+                '<div class="photo"><picture>' +
                 '<source type="image/webp" srcset="' + esc(img.replace(/\.jpg$/, ".webp") + v) + '">' +
                 '<img src="' + esc(img + v) + '" alt="' + esc(s.name + ", " + plain) + '" width="' + s.width + '" height="' + s.height + '" loading="lazy" decoding="async">' +
-                '</picture></div>' +
-                '<div class="sp26-txt">' +
-                '<h3 class="sp26-name"><span>' + esc(first) + '</span>' + esc(last) + '</h3>' +
-                '<i class="sp26-bar" aria-hidden="true"></i>' +
-                '<p class="sp26-role">' + titles.map(function (t) { return '<span>' + esc(t.role) + (t.organization ? '<b>' + esc(t.organization) + '</b>' : '') + '</span>'; }).join("") + '</p>' +
-                '</div></article></li>';
+                '</picture><span class="edition-tag">Speaker 2026</span></div>' +
+                '<h3>' + esc(s.name) + '</h3>' +
+                '<p>' + titles.map(function (t) { return esc(t.role) + (t.organization ? ", " + esc(t.organization) : ""); }).join("<br>") + '</p>' +
+                '</article>';
         }).join("");
     });
     // Vitrine d'une seule catégorie (ex. partenaire Hackathon sur la page d'inscription)

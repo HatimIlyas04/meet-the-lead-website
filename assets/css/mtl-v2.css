@@ -755,57 +755,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
     .brand-sep { height: 30px; }
 }
 
-/* =====================================================================
-   v11 — Speakers 2026 : nouveau style (cartes portrait plein cadre)
-   ===================================================================== */
-.new-speakers { background: linear-gradient(180deg, #F4F2FB 0%, #FFFFFF 46%); }
-.new-speakers::before { display: none; }
-.ns-eight-bg { position: absolute; right: -40px; top: -30px; width: auto; height: 520px; opacity: .07; pointer-events: none; user-select: none; }
-.ns-head-main { display: flex; align-items: center; gap: 22px; }
-.ns-eight { flex-shrink: 0; width: auto; height: 128px; filter: drop-shadow(0 10px 18px rgba(60,40,140,.16)); }
-.ns-sub { margin: 12px 0 0; font-size: 15px; font-weight: 500; color: var(--muted); }
-
-.ns-grid.sp26-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 26px 22px; max-width: none; }
-.sp26-item { min-width: 0; list-style: none; display: flex; }
-.sp26-item.reveal { transition-delay: calc(var(--i, 0) * 55ms); }
-.sp26-card { position: relative; display: flex; flex-direction: column; width: 100%; padding: 10px 10px 22px; border-radius: 26px; background: #fff;
-    box-shadow: 0 16px 36px rgba(36,26,80,.08), 0 0 0 1px rgba(36,26,80,.06); transition: transform .45s cubic-bezier(.2,.7,.2,1), box-shadow .45s; }
-.sp26-pic { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 18px; background: var(--bg-soft); }
-.sp26-pic::after { content: ""; position: absolute; left: 0; bottom: 0; z-index: 1; width: 34px; height: 34px; background: var(--c); clip-path: polygon(0 0, 0 100%, 100% 100%); }
-.sp26-photo, .sp26-photo img { display: block; width: 100%; height: 100%; }
-.sp26-photo img { object-fit: cover; object-position: center 20%; transition: transform .9s cubic-bezier(.2,.7,.2,1); }
-.sp26-txt { display: flex; flex-direction: column; align-items: center; padding: 18px 6px 0; text-align: center; }
-.sp26-name { margin: 0; font-size: 17px; font-weight: 800; line-height: 1.15; letter-spacing: .02em; text-transform: uppercase; color: var(--black); text-wrap: balance; }
-.sp26-name span { display: block; margin-bottom: 3px; font-size: 13.5px; font-weight: 500; letter-spacing: .01em; text-transform: none; color: var(--muted); }
-.sp26-bar { display: block; width: 28px; height: 3px; margin: 12px 0; border-radius: 3px; background: var(--c); transition: width .45s cubic-bezier(.2,.7,.2,1); }
-.sp26-role { margin: 0; font-size: 13px; line-height: 1.45; color: var(--muted); text-wrap: pretty; }
-.sp26-role span { display: block; }
-.sp26-role span + span { margin-top: 4px; }
-.sp26-role b { display: block; margin-top: 1px; font-weight: 700; color: var(--ink); }
-@media (hover: hover) {
-    .sp26-item:hover .sp26-card { transform: translateY(-6px); box-shadow: 0 24px 48px rgba(36,26,80,.14), 0 0 0 1px rgba(36,26,80,.06); }
-    .sp26-item:hover .sp26-photo img { transform: scale(1.05); }
-    .sp26-item:hover .sp26-bar { width: 56px; }
-}
-@media (max-width: 1199px) { .ns-grid.sp26-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media (max-width: 991px) {
-    .ns-grid.sp26-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 16px; }
-    .ns-eight { height: 104px; }
-}
-@media (max-width: 680px) {
-    .ns-grid.sp26-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px 12px; }
-    .ns-head-main { gap: 14px; }
-    .ns-eight { height: 82px; }
-    .ns-eight-bg { height: 300px; right: -60px; }
-    .sp26-card { padding: 7px 7px 16px; border-radius: 18px; }
-    .sp26-pic { border-radius: 13px; }
-    .sp26-pic::after { width: 24px; height: 24px; }
-    .sp26-txt { padding: 12px 2px 0; }
-    .sp26-name { font-size: 13.5px; }
-    .sp26-name span { font-size: 11.5px; }
-    .sp26-bar { margin: 9px 0; width: 22px; }
-    .sp26-role { font-size: 11.5px; line-height: 1.4; }
-}
+/* Speakers 2026 : même style que les Past Speakers + logo 8ème édition en filigrane */
+.speakers-2026 .container { position: relative; z-index: 1; }
+.s26-wm { position: absolute; z-index: 0; right: max(2%, calc((100% - 1200px) / 2)); bottom: 120px; width: min(21vw, 290px); height: auto; opacity: .2; pointer-events: none; user-select: none; }
+.speaker .photo picture { display: block; width: 100%; height: 100%; }
+.speakers-2026 + .section.dark { border-top: 1px solid rgba(255,255,255,.08); }
+@media (max-width: 680px) { .s26-wm { right: 2%; bottom: 60px; width: 46vw; opacity: .18; } }
 
 /* v11 — en-tête compact entre 992 et 1279 px : le menu reste sur une ligne */
 .main-nav a { white-space: nowrap; }
