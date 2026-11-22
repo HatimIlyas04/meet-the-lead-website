@@ -230,7 +230,7 @@
             }
             var single = list.length === 1;
             return '<section class="partner-group reveal is-' + cat.id + (single ? " is-single" : "") + '" style="--c:' + cat.color + '" aria-labelledby="pg-' + cat.id + '">' +
-                '<header class="partner-group-head"><span class="pg-num">0' + (i + 1) + '</span>' +
+                '<header class="partner-group-head"><span class="pg-num">' + (i < 9 ? "0" : "") + (i + 1) + '</span>' +
                 '<h3 id="pg-' + cat.id + '">' + esc(cat.label) + '</h3></header>' +
                 '<ul class="partner-logos" style="--cols:' + list.length + '">' +
                 list.map(function (p) { return logoCell(p, single ? 128 : 112); }).join("") +

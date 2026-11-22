@@ -82,14 +82,16 @@
 
     // Catégories officielles MTL 2026 (ordre d'affichage)
     var partnerCategories = [
-        { id: "institutionnels", label: "Partenaires institutionnels", color: "var(--blue)" },
-        { id: "hackathon", label: "Partenaires Hackathon", color: "var(--teal)" },
+        { id: "honneur", label: "Partenaires d'honneur", color: "var(--purple)" },
         { id: "sponsor", label: "Sponsors", color: "var(--pink)" },
+        { id: "hackathon", label: "Partenaires Hackathon", color: "var(--teal)" },
         { id: "jobday", label: "Partenaire Job Day", color: "var(--blue)" },
+        { id: "eau", label: "Partenaire Eau Officiel", color: "var(--blue)" },
         { id: "inclusion", label: "Partenaire Inclusion & Employabilité", color: "var(--yellow)" },
         { id: "technologique", label: "Partenaire Technologique", color: "var(--purple)" },
-        { id: "ecosysteme", label: "Partenaires Écosystème", color: "var(--teal)" },
         { id: "media", label: "Partenaires Média", color: "var(--pink)" },
+        { id: "institutionnels", label: "Partenaires institutionnels", color: "var(--blue)" },
+        { id: "ecosysteme", label: "Partenaires Écosystème", color: "var(--teal)" },
         // Pas une catégorie de sponsoring : affichée à part, en fin de section.
         { id: "organisateur", label: "Organisateur", color: "var(--purple)", organizer: true }
     ];
@@ -99,26 +101,36 @@
     // `logo: null` = fichier officiel manquant (affiché en état « logo manquant »).
     var P = "assets/img/partenaires/";
     var partners = [
+        { id: "apebi", name: "APEBI", short: "APEBI",
+          category: "honneur", order: 1,
+          logo: P + "apebi.png", width: 600, height: 188, optical: .9,
+          alt: "APEBI" },
         { id: "tamwilcom", name: "TAMWILCOM", short: "TAMWILCOM",
-          category: "institutionnels", order: 1,
+          category: "honneur", order: 2,
           logo: P + "tamwilcom.png", width: 226, height: 300, optical: 1,
           alt: "TAMWILCOM" },
+
         { id: "cri-oriental", name: "CRI de l'Oriental", short: "CRI Oriental",
-          category: "institutionnels", order: 2,
+          category: "institutionnels", order: 1,
           logo: P + "cri-oriental.png", width: 402, height: 180, optical: 1.18,
           alt: "Centre Régional d'Investissement de la Région de l'Oriental (CRI de l'Oriental)" },
         { id: "wilaya-oriental", name: "Wilaya de la Région de l'Oriental", short: "Wilaya de l'Oriental",
-          category: "institutionnels", order: 3,
+          category: "institutionnels", order: 2,
           logo: P + "wilaya-oriental.png", width: 253, height: 300, optical: 1.05,
           alt: "Wilaya de la Région de l'Oriental" },
         { id: "cgem-oriental", name: "CGEM Oriental", short: "CGEM Oriental",
-          category: "institutionnels", order: 4,
+          category: "institutionnels", order: 3,
           logo: P + "cgem-oriental.png", width: 600, height: 241, optical: 1.2,
           alt: "CGEM Oriental — Confédération Générale des Entreprises du Maroc, Région de l'Oriental" },
         { id: "fcs", name: "FCS — Fédération du Commerce et Services", short: "FCS",
-          category: "institutionnels", order: 5,
+          category: "institutionnels", order: 4,
           logo: P + "fcs.png", width: 600, height: 146, optical: 1,
           alt: "FCS — Fédération du Commerce et Services" },
+
+        { id: "cmc-oriental", name: "CMC de l'Oriental", short: "CMC Oriental",
+          category: "institutionnels", order: 5,
+          logo: P + "cmc-oriental.png", width: 336, height: 300, optical: 1.1,
+          alt: "Cité des Métiers et des Compétences (CMC) de l'Oriental" },
 
         { id: "cosumar", name: "COSUMAR", short: "COSUMAR",
           category: "hackathon", order: 1,
@@ -137,6 +149,16 @@
           category: "sponsor", order: 2,
           logo: P + "ainsi-maroc-group.png", width: 327, height: 300, optical: .95,
           alt: "AINSI MAROC GROUP" },
+
+        { id: "satguru", name: "SATGURU", short: "SATGURU",
+          category: "sponsor", order: 3,
+          logo: P + "satguru.png", width: 453, height: 300, optical: 1,
+          alt: "Satguru Travel" },
+
+        { id: "sidi-ali", name: "SIDI ALI", short: "SIDI ALI",
+          category: "eau", order: 1,
+          logo: P + "sidi-ali.png", width: 300, height: 300, optical: .9,
+          alt: "Sidi Ali" },
 
         { id: "in-groupe", name: "IN GROUPE", short: "IN GROUPE",
           category: "jobday", order: 1,
@@ -181,7 +203,7 @@
           alt: "StartupGrow Foundation" }
     ];
 
-    // Speakers confirmés de la 8ème édition (2026), dans l'ordre de l'annonce Aujourd'hui Le Maroc.
+    // Speakers confirmés de la 8ème édition (2026), dans l'ordre de l'affiche officielle.
     // Affichage : photo, nom, fonction (role + organisation), drapeau(x). Rien d'autre.
     // Plusieurs nationalités : country: ["ma", "fr"]. Nationalité non confirmée : pas de `country`.
     // Plusieurs fonctions : titles: [{ role, organization }, ...] (une ligne chacune).
@@ -190,27 +212,33 @@
         { id: "ryad-mezzour", name: "Ryad MEZZOUR",
           role: "Ministre de l'Industrie, du Commerce, de l'Investissement et de l'Inclusion Économique",
           country: "ma" },
+        { id: "omar-seghrouchni", name: "Omar SEGHROUCHNI", role: "Président", organization: "CNDP",
+          country: "ma" },
         { id: "mohamed-bachiri", name: "Mohamed BACHIRI", role: "Vice-Président Général", organization: "CGEM",
-          country: "ma" },
-        { id: "anouar-alaoui-ismaili", name: "Anouar ALAOUI ISMAILI", role: "Directeur Général", organization: "Maroc PME",
-          country: "ma" },
-        { id: "mohamed-amin-fatmi", name: "Mohamed Amin FATMI", role: "Président", organization: "CGEM Oriental",
           country: "ma" },
         { id: "rachid-ressani", name: "Rachid RESSANI", role: "Président", organization: "APEBI",
           country: "ma" },
+        { id: "anouar-alaoui-ismaili", name: "Anouar ALAOUI ISMAILI", role: "Directeur Général", organization: "Maroc PME",
+          country: "ma" },
         { id: "unielle-oupolo", name: "Unielle OUPOLO", role: "Présidente du Cercle Diplomatique",
           country: "ga" },
-        { id: "hicham-saadli", name: "Hicham SAADLI", role: "Président", organization: "Fédération du Commerce et Services",
-          country: "ma" },
-        { id: "yassine-karim", name: "Yassine KARIM",
-          titles: [{ role: "DG", organization: "Tennaxia Consulting" }, { role: "Vice-Président Général", organization: "FCS" }],
-          country: "ma" },
         { id: "tawfiq-gouach", name: "Tawfiq GOUACH", role: "Fondateur & CEO", organization: "SOJORI",
-          country: "ma" },
-        { id: "rachid-rami", name: "Rachid RAMI", role: "Directeur Général", organization: "CRI de l'Oriental",
           country: "ma" },
         { id: "zineb-hatim", name: "Zineb HATIM", role: "Présidente", organization: "Maroc Entrepreneurs",
           country: ["ma", "fr"] },
+        { id: "fantine-rouault", name: "Fantine ROUAULT",
+          role: "Spécialiste Adjointe des Partenariats et de la Mobilisation des Ressources au sein du Bureau de l'UNESCO pour le Maghreb" },
+        { id: "chaibia-balbzioui-alaoui", name: "Chaibia BALBZIOUI ALAOUI", role: "Présidente", organization: "Afem",
+          country: "ma" },
+        { id: "hicham-saadli", name: "Hicham SAADLI", role: "Président", organization: "Fédération du Commerce et Services",
+          country: "ma" },
+        { id: "yassine-karim", name: "Yassine KARIM",
+          titles: [{ role: "Directeur Général", organization: "Tennaxia Consulting" }, { role: "Vice-Président Général", organization: "FCS" }],
+          country: "ma" },
+        { id: "rachid-rami", name: "Rachid RAMI", role: "Directeur Général", organization: "CRI de l'Oriental",
+          country: "ma" },
+        { id: "mohamed-amin-fatmi", name: "Mohamed Amin FATMI", role: "Président", organization: "CGEM Oriental",
+          country: "ma" },
         { id: "abdelilah-hammada", name: "Abdelilah HAMMADA", role: "Fondateur & CEO", organization: "ALGUNO",
           country: "ma" },
         { id: "mohammed-louziri", name: "Mohammed LOUZIRI", role: "Président", organization: "Association des Très Petites Entreprises",
@@ -240,7 +268,7 @@
 
     // À incrémenter quand une photo est remplacée sous le même nom (force le rechargement)
     // + penser au ?v= des balises CSS/JS dans les pages HTML.
-    var assetsVersion = "15";
+    var assetsVersion = "16";
 
     window.MTL = {
         assetsVersion: assetsVersion,
