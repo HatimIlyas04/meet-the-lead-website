@@ -805,3 +805,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible
 @media (max-width: 680px) {
     .session-static { grid-template-columns: 1fr; gap: 4px; padding: 16px 18px; }
 }
+
+/* 2026-11-23 : Haut Patronage en tête du hero (AR puis FR) */
+.hero-patronage { position: relative; z-index: 2; text-align: center; margin: 0 auto 34px; }
+.hero-patronage .hp-ar { font-family: 'Cairo', sans-serif; font-weight: 700; font-size: clamp(19px, 2.1vw, 27px); line-height: 1.5; color: #fff; margin: 0; }
+.hero-patronage .hp-fr { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: clamp(11px, 1.05vw, 14px); letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.86); margin: 4px 0 0; }
+.hero-patronage .hp-fr::after { content: ''; display: block; width: 120px; height: 3px; margin: 14px auto 0; border-radius: 2px; background: linear-gradient(90deg, var(--teal, #05A5B6), var(--pink, #D62E83), var(--yellow, #F6BC1C)); }
+@media (max-width: 600px) { .hero-patronage { margin-bottom: 22px; } .hero-patronage .hp-fr { letter-spacing: .06em; } }
+/* formes décoratives déplacées sous le Haut Patronage (ne plus chevaucher le texte) */
+.hero .shape-ring { top: 44%; left: 53%; }
+.hero .shape-tri-teal { top: 26%; right: 41%; }

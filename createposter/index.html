@@ -189,7 +189,18 @@ function photo(ctx, st, showEmpty) {
 }
 
 const BG = '#221A4E';   // violet nuit, teinte de la photo de salle
+// 2026-11-23 (utilisateur) : bandeau « Sous le Haut Patronage » (AR puis FR) tout en haut ; le poster d'origine est réduit dessous
+const HP_D = 92, HP_S = (H - HP_D) / H, HP_OX = W * (1 - HP_S) / 2;
 function render(ctx, st, opt = {}) {
+  ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, W, H); ctx.fillStyle = BG; ctx.fillRect(0, 0, W, H);
+  ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic'; ctx.fillStyle = '#FFFFFF';
+  ctx.direction = 'rtl'; ctx.font = "700 29px Cairo, sans-serif"; ctx.fillText('تحت الرعاية السامية لصاحب الجلالة الملك محمد السادس نصره الله', W / 2, 44); ctx.direction = 'ltr';
+  ctx.font = "600 19.5px Poppins, sans-serif"; ctx.fillStyle = 'rgba(255,255,255,.9)'; ctx.fillText('SOUS LE HAUT PATRONAGE DE SA MAJESTÉ LE ROI MOHAMMED VI, QUE DIEU L’ASSISTE', W / 2, 76);
+  ctx.translate(HP_OX, HP_D); ctx.scale(HP_S, HP_S);
+  renderBody(ctx, st, opt);
+  ctx.restore();
+}
+function renderBody(ctx, st, opt = {}) {
   ctx.save(); ctx.clearRect(0, 0, W, H); ctx.textBaseline = 'alphabetic'; ctx.direction = 'ltr';
   // fond : la salle MEET THE LEAD (photo de l'utilisateur, agrandie Real-ESRGAN) sous un voile violet nuit
   ctx.fillStyle = BG; ctx.fillRect(0, 0, W, H);
@@ -290,7 +301,7 @@ function download() {
   out.toBlob((b) => { const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 4000); toast('PNG téléchargé : ' + name); }, 'image/png');
 }
 function initDrag() {
-  let drag = null; const pos = (e) => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) * W / r.width, (e.clientY - r.top) * H / r.height]; };
+  let drag = null; const pos = (e) => { const r = cv.getBoundingClientRect(); return [((e.clientX - r.left) * W / r.width - HP_OX) / HP_S, ((e.clientY - r.top) * H / r.height - HP_D) / HP_S]; };
   const hit = (x, y) => state.img && Math.abs(x - PH.cx) <= PH.d / 2 + 10 && Math.abs(y - PH.cy) <= PH.d / 2 + 10;
   cv.addEventListener('pointerdown', (e) => { const [x, y] = pos(e); if (!hit(x, y)) return; drag = { x, y }; cv.setPointerCapture(e.pointerId); e.preventDefault(); });
   cv.addEventListener('pointermove', (e) => { const [x, y] = pos(e); if (!drag) { cv.style.cursor = hit(x, y) ? 'grab' : 'default'; return; }
