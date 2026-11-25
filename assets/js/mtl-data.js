@@ -84,7 +84,7 @@
     var partnerCategories = [
         { id: "honneur", label: "Partenaires d'honneur", color: "var(--purple)" },
         { id: "sponsor", label: "Sponsors", color: "var(--pink)" },
-        { id: "hackathon", label: "Partenaires Hackathon", color: "var(--teal)" },
+        { id: "hackathon", label: "Partenaire Hackathon", color: "var(--teal)" },
         { id: "jobday", label: "Partenaire Job Day", color: "var(--blue)" },
         { id: "eau", label: "Partenaire Eau Officiel", color: "var(--blue)" },
         { id: "inclusion", label: "Partenaire Inclusion & Employabilité", color: "var(--yellow)" },
@@ -137,7 +137,7 @@
           logo: P + "cosumar.png", width: 403, height: 300, optical: .9,
           alt: "COSUMAR" },
         { id: "apefe", name: "APEFE", short: "APEFE",
-          category: "hackathon", order: 2,
+          category: "honneur", order: 3,
           logo: P + "apefe.png", width: 572, height: 300, optical: .92,
           alt: "APEFE" },
 
@@ -268,7 +268,7 @@
 
     // À incrémenter quand une photo est remplacée sous le même nom (force le rechargement)
     // + penser au ?v= des balises CSS/JS dans les pages HTML.
-    var assetsVersion = "17";
+    var assetsVersion = "18";
 
     window.MTL = {
         assetsVersion: assetsVersion,
